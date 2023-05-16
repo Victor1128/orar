@@ -1,8 +1,13 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import Services.Service;
+import Services.AuditService;
+import Services.MainService;
 
 public class Main {
     private final static List<String> availableCommands = Arrays.asList("add_student", "add_profesor", "add_materie", "add_serie", "add_sala", "add_ora", "get_student", "get_profsor", "show_orar_student", "show_orar_student_azi", "show_orar_profesor", "show_orar_profesor_azi", "help", "exit");
@@ -12,50 +17,71 @@ public class Main {
             System.out.println((i+1) + ". " + " (" + availableCommands.get(i) + ")");
     }
 
+    public static Connection getConnection(){
+        Connection connection = null;
+        try {
+            File file = new File("config/secret.txt");
+            Scanner in = new Scanner(file);
+            String url = in.nextLine();
+            String username = in.nextLine();
+            String password = in.nextLine();
+            connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Test");
+            while(resultSet.next()){
+                System.out.println(resultSet.getString(1));
+            }
+        } catch (SQLException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return connection;
+    }
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Service service = new Service();
+        MainService mainService = new MainService();
+        AuditService auditService = new AuditService();
         boolean exit = false;
-
+        getConnection();
         while(!exit){
             System.out.println("Introduceti comanda:");
             String command = in.nextLine();
             switch (command){
                 case "add_student":
-                    service.createStudent(in);
+                    mainService.createStudent(in);
                     break;
                 case "add_profesor":
-                    service.createProfesor(in);
+                    mainService.createProfesor(in);
                     break;
                 case "add_materie":
-                    service.createMaterie(in);
+                    mainService.createMaterie(in);
                     break;
                 case "add_serie":
-                    service.createSerie(in);
+                    mainService.createSerie(in);
                     break;
                 case "add_sala":
-                    service.createSala(in);
+                    mainService.createSala(in);
                     break;
                 case "add_ora":
-                    service.createOra(in);
+                    mainService.createOra(in);
                     break;
                 case "get_student":
-                    service.getStudent(in);
+                    mainService.getStudent(in);
                     break;
                 case "get_profesor":
-                    service.getProfesor(in);
+                    mainService.getProfesor(in);
                     break;
                 case "show_orar_student":
-                    service.afisareOrarStudent(in);
+                    mainService.afisareOrarStudent(in);
                     break;
                 case "show_orar_student_azi":
-                    service.afisareOrarStudentZiCurenta(in);
+                    mainService.afisareOrarStudentZiCurenta(in);
                     break;
                 case "show_orar_profesor":
-                    service.afisareOrarProfesor(in);
+                    mainService.afisareOrarProfesor(in);
                     break;
                 case "show_orar_profesor_azi":
-                    service.afisareOrarProfesorZiCurenta(in);
+                    mainService.afisareOrarProfesorZiCurenta(in);
                     break;
                 case "help":
                     printAllCommands();
@@ -67,6 +93,12 @@ public class Main {
                     System.out.println("Comanda invalida!");
                     break;
             }
+            if (!command.equals("help") && !command.equals("exit") && availableCommands.contains(command))
+                try {
+                    auditService.write(command);
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
         }
 
     }

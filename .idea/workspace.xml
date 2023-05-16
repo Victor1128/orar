@@ -4,28 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14f0c086-36fe-4c98-b058-94d7f0fee81e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Orar.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Amfiteatru.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Curs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Laborator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Materie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Ora.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Profesor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Sala.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/SalaLaborator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/SalaSeminar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Seminar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Serie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Student.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Services/Service.java" afterDir="false" />
+    <list default="true" id="14f0c086-36fe-4c98-b058-94d7f0fee81e" name="Changes" comment="etapa 1">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/secret.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Services/AuditService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Serie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Serie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/MainService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -56,15 +44,29 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "extract.method.default.visibility": "private",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
+    "last_opened_file_path": "C:/Users/victo/OneDrive/Documents/Facultate/anul2/sem2/pao/proiect/Orar/lib/mysql-connector-j-8.0.33.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -91,8 +93,20 @@
       <updated>1680696184878</updated>
       <workItem from="1680696186969" duration="4972000" />
       <workItem from="1680808162274" duration="75000" />
-      <workItem from="1680808495419" duration="11649000" />
+      <workItem from="1680808495419" duration="12671000" />
+      <workItem from="1681896995931" duration="171000" />
+      <workItem from="1683976306125" duration="5859000" />
+      <workItem from="1684068758742" duration="9000" />
+      <workItem from="1684261606280" duration="551000" />
     </task>
+    <task id="LOCAL-00001" summary="etapa 1">
+      <created>1680820770112</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1680820770112</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,10 +117,36 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="etapa 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="etapa 1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

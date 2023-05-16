@@ -6,7 +6,7 @@ import java.util.*;
 
 import Models.*;
 
-public class Service {
+public class MainService {
     private List<Student> studenti = new ArrayList<>();
     private List<Profesor> profesori = new ArrayList<>();
     private List<Sala> sali = new ArrayList<>();
