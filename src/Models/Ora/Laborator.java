@@ -8,7 +8,7 @@ import Models.Sala.SalaLaborator;
 import java.util.List;
 import java.util.Scanner;
 
-import static utils.Utils.selectFromMultipleChoices;
+import static util.Utils.selectFromMultipleChoices;
 
 public class Laborator extends Ora{
     private String grupa;

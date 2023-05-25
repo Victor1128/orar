@@ -1,4 +1,4 @@
-package utils;
+package util;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ public class CreateDatabase {
                     "id INT PRIMARY KEY AUTO_INCREMENT," +
                     "name VARCHAR(50) NOT NULL," +
                     "birthdate DATE NOT NULL," +
-                    "grupa INT NOT NULL," +
+                    "grupa VARCHAR(50) NOT NULL," +
                     "study_year INT NOT NULL)");
         }catch (SQLException e){
             e.printStackTrace();
@@ -148,18 +148,17 @@ public class CreateDatabase {
 
     public static void createCursTable(){
         try{
-             connection.createStatement().execute("CREATE TABLE IF NOT EXISTS curs(" +
+             connection.createStatement().execute("CREATE TABLE IF NOT EXISTS cursuri(" +
                     "id INT PRIMARY KEY AUTO_INCREMENT REFERENCES ore(id) ON DELETE CASCADE," +
-                    "serie_id INT NOT NULL REFERENCES serie(id) ON DELETE CASCADE)"
+                    "serie_id INT NOT NULL REFERENCES serii(id) ON DELETE CASCADE)"
             );
         }catch(SQLException e){
             e.printStackTrace();
         }
     }
-
     public static void createSeminarTable(){
         try{
-            connection.createStatement().execute("CREATE TABLE IF NOT EXISTS seminar(" +
+            connection.createStatement().execute("CREATE TABLE IF NOT EXISTS seminare(" +
                     "id INT PRIMARY KEY AUTO_INCREMENT REFERENCES ore(id)ON DELETE CASCADE," +
                     "grupa VARCHAR(50) NOT NULL)"
             );
@@ -170,7 +169,7 @@ public class CreateDatabase {
 
     public static void createLaboratorTable(){
         try{
-             connection.createStatement().execute("CREATE TABLE IF NOT EXISTS laborator(" +
+             connection.createStatement().execute("CREATE TABLE IF NOT EXISTS laboratoare(" +
                     "id INT PRIMARY KEY AUTO_INCREMENT REFERENCES ore(id)ON DELETE CASCADE," +
                     "grupa VARCHAR(50) NOT NULL)"
             );
@@ -181,7 +180,7 @@ public class CreateDatabase {
 
     public static void createSerieTable(){
         try{
-            connection.createStatement().execute("CREATE TABLE IF NOT EXISTS serie(" +
+            connection.createStatement().execute("CREATE TABLE IF NOT EXISTS serii(" +
                     "id INT PRIMARY KEY AUTO_INCREMENT," +
                     "name VARCHAR(50) NOT NULL," +
                     "grupe VARCHAR(100) NOT NULL)"

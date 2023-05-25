@@ -9,7 +9,7 @@ import Models.Serie.Serie;
 import java.util.List;
 import java.util.Scanner;
 
-import static utils.Utils.selectFromMultipleChoices;
+import static util.Utils.selectFromMultipleChoices;
 
 public class Curs extends Ora{
     private Serie serie;

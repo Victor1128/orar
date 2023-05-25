@@ -1,5 +1,7 @@
 package Models.Student;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -29,6 +31,17 @@ public class Student {
 
     public Student(Scanner in){
         read(in);
+    }
+    public Student(ResultSet rs){
+        try{
+            id = rs.getLong("id");
+            name = rs.getString("name");
+            birthDate = rs.getDate("birth_date").toLocalDate();
+            grupa = rs.getString("grupa");
+            studyYear = rs.getInt("study_year");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public void read(Scanner in){

@@ -1,15 +1,27 @@
 package Models.Materie;
 
-import utils.ClassWithName;
+import util.ClassWithName;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Materie implements ClassWithName {
+    private Long id = null;
     private String name;
     private int nrCredite;
     private int nrOreCurs;
     private int nrOreSeminar;
     private int nrOreLaborator;
+
+    public Materie(Long id, String name, int nrCredite, int nrOreCurs, int nrOreSeminar, int nrOreLaborator) {
+        this.id = id;
+        this.name = name;
+        this.nrCredite = nrCredite;
+        this.nrOreCurs = nrOreCurs;
+        this.nrOreSeminar = nrOreSeminar;
+        this.nrOreLaborator = nrOreLaborator;
+    }
 
     public Materie(String name, int nrCredite, int nrOre, int nrOreSeminar, int nrOreLaborator) {
         this.name = name;
@@ -17,6 +29,11 @@ public class Materie implements ClassWithName {
         this.nrOreCurs = nrOre;
         this.nrOreSeminar = nrOreSeminar;
         this.nrOreLaborator = nrOreLaborator;
+    }
+
+    public Materie(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Materie(Scanner in, String opt) {
@@ -27,14 +44,43 @@ public class Materie implements ClassWithName {
         }
     }
 
+    public Materie(ResultSet rs){
+        try {
+            id = rs.getLong("id");
+            name = rs.getString("name");
+            nrCredite = rs.getInt("nr_credite");
+            nrOreCurs = rs.getInt("nr_ore_curs");
+            nrOreSeminar = rs.getInt("nr_ore_seminar");
+            nrOreLaborator = rs.getInt("nr_ore_laborator");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Materie() {}
 
 
     public Materie(String name) {
         this.name = name;
     }
-    @Override
 
+    public int getNrOreCurs() {
+        return nrOreCurs;
+    }
+
+    public void setNrOreCurs(int nrOreCurs) {
+        this.nrOreCurs = nrOreCurs;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
     public String getName() {
         return name;
     }

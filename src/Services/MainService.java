@@ -3,29 +3,22 @@ package Services;
 import java.time.LocalDate;
 import java.util.*;
 
-import Models.Materie.Materie;
-import Models.Ora.Curs;
-import Models.Ora.Laborator;
-import Models.Ora.Ora;
-import Models.Ora.Seminar;
-import Models.Profesor.Profesor;
-import Models.Sala.Amfiteatru;
-import Models.Sala.Sala;
-import Models.Sala.SalaLaborator;
-import Models.Sala.SalaSeminar;
-import Models.Serie.Serie;
-import Models.Student.Student;
-import utils.ClassWithName;
+import Models.Materie.*;
+import Models.Ora.*;
+import Models.Profesor.*;
+import Models.Sala.*;
+import Models.Serie.*;
+import Models.Student.*;
 
 public class MainService {
-    private List<Student> studenti = new ArrayList<>();
-    private List<Profesor> profesori = new ArrayList<>();
-    private List<Sala> sali = new ArrayList<>();
-    private List<Materie> materii = new ArrayList<>();
-    private List<Serie> serii = new ArrayList<>();
-    private Map<String, List<Ora>> grupaOreMap = new HashMap<>();
-    private Map<Profesor, List<Ora>> profesorOreMap = new HashMap<>();
-    private List<Ora> ore = new ArrayList<>();
+    private final List<Student> studenti = new ArrayList<>();
+    private final List<Profesor> profesori = new ArrayList<>();
+    private final List<Sala> sali = new ArrayList<>();
+    private final List<Materie> materii = new ArrayList<>();
+    private final List<Serie> serii = new ArrayList<>();
+    private final Map<String, List<Ora>> grupaOreMap = new HashMap<>();
+    private final Map<Profesor, List<Ora>> profesorOreMap = new HashMap<>();
+    private final List<Ora> ore = new ArrayList<>();
     private final List<String> zileleSaptamanii = Arrays.asList("Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica");
 
     private void addOraToMaps(Profesor p, String grupa) {
@@ -265,4 +258,3 @@ public class MainService {
         }
     }
 }
-

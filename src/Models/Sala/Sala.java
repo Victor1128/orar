@@ -1,6 +1,6 @@
 package Models.Sala;
 
-import utils.ClassWithName;
+import util.ClassWithName;
 
 import java.util.Scanner;
 

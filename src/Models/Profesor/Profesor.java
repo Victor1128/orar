@@ -1,12 +1,14 @@
 package Models.Profesor;
 
 import Models.Materie.Materie;
-import utils.ClassWithName;
+import util.ClassWithName;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-import static utils.Utils.selectFromMultipleChoices;
+import static util.Utils.selectFromMultipleChoices;
 
 public class Profesor implements ClassWithName {
     private Long id = null;
@@ -27,6 +29,17 @@ public class Profesor implements ClassWithName {
     public Profesor(Scanner in, List<Materie> materii){
         read(in, materii);
     }
+
+    public Profesor(ResultSet rs){
+        try {
+            id = rs.getLong("id");
+            name = rs.getString("name");
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+
 
     public void read(Scanner in, List<Materie> materii) {
         System.out.println("Nume: ");

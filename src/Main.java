@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import Services.AuditService;
 import Services.MainService;
-import utils.CreateDatabase;
+import util.CreateDatabase;
 
 public class Main {
     private final static List<String> availableCommands = Arrays.asList("add_student", "add_profesor", "add_materie", "add_serie", "add_sala", "add_ora", "get_student", "get_profsor", "show_orar_student", "show_orar_student_azi", "show_orar_profesor", "show_orar_profesor_azi", "help", "exit");

@@ -1,12 +1,17 @@
 package Models.Serie;
 
-import utils.ClassWithName;
+import util.ClassWithName;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import static util.Utils.listFromString;
+
 public class Serie implements ClassWithName {
+    private Long id;
     private String name;
     private List<String> grupe;
 
@@ -15,6 +20,23 @@ public class Serie implements ClassWithName {
         Collections.sort(grupe);
         this.grupe = grupe;
     }
+    public Serie(Long id, String name, List<String> grupe) {
+        this.id = id;
+        this.name = name;
+        this.grupe = grupe;
+    }
+
+    public Serie(ResultSet rs){
+        try{
+            id = rs.getLong("id");
+            name = rs.getString("name");
+            String grupe = rs.getString("grupe");
+            this.grupe = listFromString(grupe);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
 
     public Serie(Scanner in){
         read(in);
@@ -30,6 +52,16 @@ public class Serie implements ClassWithName {
             String grupa = in.nextLine();
             grupe.add(grupa);
         }
+    }
+
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
