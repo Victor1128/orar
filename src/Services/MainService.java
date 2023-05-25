@@ -1,209 +1,138 @@
 package Services;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import Models.*;
+import Models.Materie.*;
+import Models.Ora.*;
+import Models.Profesor.*;
+import Models.Sala.*;
+import Models.Serie.*;
+import Models.Student.*;
 
 public class MainService {
-    private List<Student> studenti = new ArrayList<>();
-    private List<Profesor> profesori = new ArrayList<>();
-    private List<Sala> sali = new ArrayList<>();
-    private List<Materie> materii = new ArrayList<>();
-    private List<Serie> serii = new ArrayList<>();
-    private Map<String, List<Ora>> grupaOreMap = new HashMap<>();
-    private Map<Profesor, List<Ora>> profesorOreMap = new HashMap<>();
+    private  List<Student> studenti = new ArrayList<>();
+    private  List<Profesor> profesori = new ArrayList<>();
+    private  List<Sala> sali = new ArrayList<>();
+    private  List<Materie> materii = new ArrayList<>();
+    private  List<Serie> serii = new ArrayList<>();
     private List<Ora> ore = new ArrayList<>();
-    private final List<Class<? extends Sala>> tipuriSali = Arrays.asList(Amfiteatru.class, SalaLaborator.class, SalaSeminar.class);
+    private final Map<String, List<Ora>> grupaOreMap = new HashMap<>();
+    private final Map<Profesor, List<Ora>> profesorOreMap = new HashMap<>();
     private final List<String> zileleSaptamanii = Arrays.asList("Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica");
+    private final StudentDatabase studentDatabase = new StudentDatabase();
+    private final ProfesorDatabase profesorDatabase = new ProfesorDatabase();
+    private final MaterieDatabase materieDatabase = new MaterieDatabase();
+    private final SalaDatabase salaDatabase = new SalaDatabase();
+    private final SerieDatabase serieDatabase = new SerieDatabase();
+    private final OraDatabase oraDatabase = new OraDatabase();
 
-    private void addOraToMaps(Profesor p, String grupa) {
+    public MainService() throws SQLException {
+        studenti = studentDatabase.getAll();
+        profesori = profesorDatabase.getAll();
+        materii = materieDatabase.getAll();
+        sali = salaDatabase.getAll();
+        serii = serieDatabase.getAll();
+        ore = oraDatabase.getAll();
+        for (var ora : ore){
+            if(!(ora instanceof Curs curs)){
+                addOraToMaps(ora.getProfesor(), ora.getGrupa(), ora);
+            }else{
+                for (String g : curs.getSerie().getGrupe()) {
+                    if(!grupaOreMap.containsKey(g))
+                        grupaOreMap.put(g, new ArrayList<>());
+                    grupaOreMap.get(g).add(ora);
+                }
+                if(!profesorOreMap.containsKey(curs.getProfesor()))
+                    profesorOreMap.put(curs.getProfesor(), new ArrayList<>());
+                profesorOreMap.get(curs.getProfesor()).add(ora);
+            }
+        }
+    }
+
+    private void addOraToMaps(Profesor p, String grupa, Ora ora) {
         if(!grupaOreMap.containsKey(grupa))
             grupaOreMap.put(grupa, new ArrayList<>());
-        grupaOreMap.get(grupa).add(ore.get(ore.size() - 1));
+        grupaOreMap.get(grupa).add(ora);
         if(!profesorOreMap.containsKey(p))
             profesorOreMap.put(p, new ArrayList<>());
-        profesorOreMap.get(p).add(ore.get(ore.size() - 1));
+        profesorOreMap.get(p).add(ora);
     }
-    public void createStudent(Scanner in){
-        System.out.println("Nume: ");
-        String nume = in.nextLine();
-        System.out.println("Data nasterii (zz.ll.aaaa): ");
-        String dataNasterii = in.nextLine();
-        System.out.println("Grupa: ");
-        String grupa = in.nextLine();
-        System.out.println("An studiu: ");
-        int anStudiu = Integer.parseInt(in.nextLine());
-        LocalDate dataNasterii2 = LocalDate.parse(dataNasterii, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        studenti.add(new Student(nume, dataNasterii2, grupa, anStudiu));
+    public void createStudent(Scanner in) throws SQLException {
+        Student student = new Student(in);
+        studentDatabase.add(student);
+        studenti = studentDatabase.getAll();
         System.out.println("Studentul a fost creat cu succes!");
     }
 
-    public void createProfesor(Scanner in){
-        System.out.println("Nume: ");
-        String nume = in.nextLine();
-        System.out.println("Numar de materii: ");
-        int nrMaterii = Integer.parseInt(in.nextLine());
-        List<Materie> materiiProfesor = new ArrayList<>();
-        for (int i = 0; i < nrMaterii; i++) {
-            int optiune = -1;
-            while(optiune < 0 || optiune >= materii.size()) {
-                System.out.println("Selectati o materie: ");
-                for (int j = 0; j < materii.size(); j++) {
-                    System.out.println((j + 1) + ". " + materii.get(j).getNume());
-                }
-                optiune = Integer.parseInt(in.nextLine());
-                optiune--;
-            }
-            materiiProfesor.add(materii.get(optiune));
-        }
-        profesori.add(new Profesor(nume, materiiProfesor));
+    public void createProfesor(Scanner in) throws SQLException {
+        Profesor profesor = new Profesor(in, materii);
+        profesorDatabase.add(profesor);
+        profesori = profesorDatabase.getAll();
         System.out.println("Profesorul a fost creat cu succes!");
     }
 
-    public void createSerie(Scanner in) {
-        System.out.println("Nume: ");
-        String nume = in.nextLine();
-        System.out.println("Numar de grupe: ");
-        int nrGrupe = Integer.parseInt(in.nextLine());
-        List<String> grupe = new ArrayList<>();
-        for (int i = 0; i < nrGrupe; i++) {
-            System.out.println("Grupa " + (i + 1) + ": ");
-            String grupa = in.nextLine();
-            grupe.add(grupa);
-        }
-        serii.add(new Serie(nume, grupe));
+    public void createSerie(Scanner in) throws SQLException {
+        Serie serie = new Serie(in);
+        serieDatabase.add(serie);
+        serii = serieDatabase.getAll();
         System.out.println("Serie creata cu succes!");
     }
 
-    public void createMaterie(Scanner in){
-        Materie m = new Materie();
-        m.readSimple(in);
-        materii.add(m);
+    public void createMaterie(Scanner in) throws SQLException {
+        Materie materie = new Materie(in, "Simple");
+        materieDatabase.add(materie);
+        materii = materieDatabase.getAll();
         System.out.println("Materia a fost creata cu succes!");
     }
 
-    public void createSala(Scanner in){
-        System.out.println("Nume: ");
-        String nume = in.nextLine();
-        System.out.println("Numar de locuri: ");
-        int nrLocuri = Integer.parseInt(in.nextLine());
+    public void createSala(Scanner in) throws SQLException {
         int optiune = -1;
         while(optiune < 0 || optiune > 2) {
             System.out.println("Tip (0 - amfiteatru, 1 - laborator, 2 - seminar):");
             optiune = Integer.parseInt(in.nextLine());
         }
         switch (optiune) {
-            case 0 -> sali.add(new Amfiteatru(nume, nrLocuri));
-            case 1 -> sali.add(new SalaLaborator(nume, nrLocuri));
-            case 2 -> sali.add(new SalaSeminar(nume, nrLocuri));
+            case 0 -> salaDatabase.addAmfiteatru(new Amfiteatru(in));
+            case 1 -> salaDatabase.addLaborator(new SalaLaborator(in, materii));
+            case 2 -> salaDatabase.addSalaSeminar(new SalaSeminar(in));
         }
+        sali = salaDatabase.getAll();
         System.out.println("Sala a fost creata cu succes!");
-
-//        sali.add(new tipuriSali.get(optiune)(nume, nrLocuri));
-//        Class<? extends Sala> selectedClass = tipuriSali.get(optiune);
-//        Sala s = new selectedClass.getConstructors()[0].newInstance(nume, nrLocuri);
-
     }
 
-    public void createOra(Scanner in){
+    public void createOra(Scanner in) throws SQLException {
         int tip = -1;
         while(tip < 0 || tip > 2) {
             System.out.println("Tip (0 - curs, 1 - laborator, 2 - seminar):");
             tip = Integer.parseInt(in.nextLine());
         }
-        final int finalTip = tip;
-        int optiune = -1;
-        while(optiune < 0 || optiune >= materii.size()) {
-            System.out.println("Selectati o materie: ");
-            for (int i = 0; i < materii.size(); i++) {
-                System.out.println((i + 1) + ". " + materii.get(i).getNume());
-            }
-            optiune = Integer.parseInt(in.nextLine());
-            optiune--;
-        }
-        Materie m = materii.get(optiune);
-        List<Profesor> profesoriPosibili = profesori.stream().filter(profesor -> profesor.getMaterii().contains(m)).toList();
-        optiune = -1;
-        while(optiune < 0 || optiune >= profesoriPosibili.size()) {
-            System.out.println("Selectati un profesor: ");
-            for (int i = 0; i < profesoriPosibili.size(); i++) {
-                System.out.println((i + 1) + ". " + profesoriPosibili.get(i).getName());
-            }
-            optiune = Integer.parseInt(in.nextLine());
-            optiune--;
-        }
-        Profesor p = profesoriPosibili.get(optiune);
-        System.out.println("Selectati o sala: ");
-        optiune = -1;
-        List<Sala> saliPosibile = new ArrayList<>();
-        saliPosibile = sali.stream().filter(sala -> sala.getClass() == tipuriSali.get(finalTip)).toList();
-        if (saliPosibile.size() == 0) {
-            System.out.println("Nu exista nicio sala pentru aceasta ora!");
-            return;
-        }
-        while(optiune < 0 || optiune >= sali.size()) {
-            System.out.println("Selectati o sala: ");
-            for (int i = 0; i < saliPosibile.size(); i++) {
-                System.out.println((i + 1) + ". " + saliPosibile.get(i).getNume());
-            }
-            optiune = Integer.parseInt(in.nextLine());
-            optiune--;
-        }
-        Sala s = saliPosibile.get(optiune);
-        System.out.println("Ora inceput: ");
-        int oraInceput = Integer.parseInt(in.nextLine());
-        System.out.println("Ora sfarsit: ");
-        int oraSfarsit = Integer.parseInt(in.nextLine());
-        int ziuaSaptamanii = -1;
-        while (ziuaSaptamanii < 1 || ziuaSaptamanii > 7){
-            System.out.println("Ziua saptamanii (1 - 7): ");
-            ziuaSaptamanii = Integer.parseInt(in.nextLine());
-        }
-        ziuaSaptamanii--;
-//        System.out.println("Frecventa: ");
-//        String frecventa = in.nextLine();
-        String grupa = null;
-        Serie serie = null;
-        if(tip != 0){
-            System.out.println("Grupa: ");
-            grupa = in.nextLine();
-        }
-        else {
-            System.out.println("Seria: ");
-            optiune = -1;
-            while(optiune < 0 || optiune >= serii.size()) {
-                System.out.println("Selectati o serie: ");
-                for (int i = 0; i < serii.size(); i++) {
-                    System.out.println((i + 1) + ". " + serii.get(i).getNume());
-                }
-                optiune = Integer.parseInt(in.nextLine());
-                optiune--;
-            }
-            serie = serii.get(optiune);
-        }
         switch (tip){
             case 0 -> {
-                ore.add(new Curs(m, p, (Amfiteatru) s, oraInceput, oraSfarsit, ziuaSaptamanii, serie));
-                for (String g : serie.getGrupe()) {
+                Curs curs = new Curs(in, profesori, materii, sali, serii);
+                oraDatabase.addCurs(curs);
+                for (String g : curs.getSerie().getGrupe()) {
                     if(!grupaOreMap.containsKey(g))
                         grupaOreMap.put(g, new ArrayList<>());
-                    grupaOreMap.get(g).add(ore.get(ore.size() - 1));
+                    grupaOreMap.get(g).add(curs);
                 }
-                if(!profesorOreMap.containsKey(p))
-                    profesorOreMap.put(p, new ArrayList<>());
-                profesorOreMap.get(p).add(ore.get(ore.size() - 1));
+                if(!profesorOreMap.containsKey(curs.getProfesor()))
+                    profesorOreMap.put(curs.getProfesor(), new ArrayList<>());
+                profesorOreMap.get(curs.getProfesor()).add(curs);
             }
             case 1 -> {
-                ore.add(new Laborator(m, p, (SalaLaborator) s, oraInceput, oraSfarsit, ziuaSaptamanii, grupa));
-                addOraToMaps(p, grupa);
+                Laborator laborator = new Laborator(in, profesori, materii, sali);
+                oraDatabase.addLaborator(laborator);
+                addOraToMaps(laborator.getProfesor(), laborator.getGrupa(), laborator);
             }
             case 2 -> {
-                ore.add(new Seminar(m, p, (SalaSeminar) s, oraInceput, oraSfarsit, ziuaSaptamanii, grupa));
-                addOraToMaps(p, grupa);
+                Seminar seminar = new Seminar(in, profesori, materii, sali);
+                oraDatabase.addSeminar(seminar);
+                addOraToMaps(seminar.getProfesor(), seminar.getGrupa(), seminar);
             }
-            }
+        }
+        ore = oraDatabase.getAll();
         System.out.println("Ora a fost adaugata cu succes!");
     }
 
@@ -245,11 +174,11 @@ public class MainService {
 
     public Profesor findProfesorByName(String name){
         int cnt = 0, index = -1;
-        for (Profesor p : profesori) {
-            if(p.getName().equals(name))
+        for (int i = 0; i < profesori.size(); i++) {
+            if(profesori.get(i).getName().equals(name))
             {
                 cnt++;
-                index = profesori.indexOf(p);
+                index = i;
             }
         }
         if(cnt == 0)
@@ -263,13 +192,20 @@ public class MainService {
     public void getStudent(Scanner in){
         System.out.println("Introduceti numele studentului: ");
         String nume = in.nextLine();
-        System.out.println(findStudentByName(nume));
+        Student student = findStudentByName(nume);
+        if (student != null)
+            System.out.println(student);
+        else{
+            System.out.println("Introduceti id-ul studentului: ");
+            Long id = in.nextLong();
+            System.out.println(findStudentById(id));
+        }
     }
 
     public void getProfesor(Scanner in){
         System.out.println("Introduceti numele profesorului: ");
         String nume = in.nextLine();
-        System.out.println( findProfesorByName(nume));
+        System.out.println(findProfesorByName(nume));
     }
     public void afisareOrarStudent(Scanner in){
         System.out.println("Introduceti numele studentului: ");
@@ -310,7 +246,12 @@ public class MainService {
                 return;
             }
         }
-        Collections.sort(profesorOreMap.get(p));
+        try {
+            Collections.sort(profesorOreMap.get(p));
+        }catch (NullPointerException e){
+            System.out.println("Profesorul nu are ore!");
+            return;
+        }
         int zs = -1;
         for (Ora o : profesorOreMap.get(p)) {
                 if(o.getZiuaSaptamanii() != zs){
@@ -362,5 +303,18 @@ public class MainService {
             System.out.println(o.toStringProfesor());
         }
     }
-}
 
+    public void test() throws SQLException{
+        profesori = profesorDatabase.getAll();
+        for (var materie : materii){
+            System.out.println(materie + " ");
+            for(var profesor : profesori){
+                for(var materie2: profesor.getMaterii())
+                    System.out.print(materie2+".....");
+                System.out.println(profesor.getMaterii().contains(materie));
+                System.out.println();
+            }
+        }
+
+    }
+}

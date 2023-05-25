@@ -1,11 +1,14 @@
-package Models;
+package Models.Student;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class Student {
-    private final Long id;
+    private Long id = null;
 
-    private static Long idCounter = 0L;
     private String name;
     private LocalDate birthDate;
     private String grupa;
@@ -20,15 +23,45 @@ public class Student {
     }
 
     public Student(String name, LocalDate birthDate, String grupa, int studyYear) {
-        this.id = idCounter++;
         this.name = name;
         this.birthDate = birthDate;
         this.grupa = grupa;
         this.studyYear = studyYear;
     }
 
+    public Student(Scanner in){
+        read(in);
+    }
+    public Student(ResultSet rs){
+        try{
+            id = rs.getLong("id");
+            name = rs.getString("name");
+            birthDate = rs.getDate("birthdate").toLocalDate();
+            grupa = rs.getString("grupa");
+            studyYear = rs.getInt("study_year");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void read(Scanner in){
+        System.out.println("Nume: ");
+        name = in.nextLine();
+        System.out.println("Data nasterii (zz.ll.aaaa): ");
+        String dataNasterii = in.nextLine();
+        System.out.println("Grupa: ");
+        grupa = in.nextLine();
+        System.out.println("An studiu: ");
+        studyYear = Integer.parseInt(in.nextLine());
+        birthDate = LocalDate.parse(dataNasterii, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

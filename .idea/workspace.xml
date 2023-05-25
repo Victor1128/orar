@@ -4,16 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14f0c086-36fe-4c98-b058-94d7f0fee81e" name="Changes" comment="etapa 1">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+    <list default="true" id="14f0c086-36fe-4c98-b058-94d7f0fee81e" name="Changes" comment="easy queries">
       <change afterPath="$PROJECT_DIR$/config/secret.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Services/AuditService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Models/Ora/OraDatabase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Models/Sala/SalaDatabase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/audit.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/audit.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Serie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Serie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/MainService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Materie/Materie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Materie/Materie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Ora/Curs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Ora/Curs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Ora/Laborator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Ora/Laborator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Ora/Ora.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Ora/Ora.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Ora/Seminar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Ora/Seminar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Profesor/Profesor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Profesor/Profesor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Profesor/ProfesorDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Profesor/ProfesorDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Sala/Amfiteatru.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Sala/Amfiteatru.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Sala/Sala.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Sala/Sala.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Sala/SalaLaborator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Sala/SalaLaborator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Sala/SalaSeminar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Sala/SalaSeminar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Serie/Serie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Serie/Serie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Serie/SerieDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Serie/SerieDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Student/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/MainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/MainService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/CreateDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/CreateDatabase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,11 +37,17 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -42,33 +61,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "extract.method.default.visibility": "private",
-    "jdk.selected.JAVA_MODULE": "openjdk-19",
-    "last_opened_file_path": "C:/Users/victo/OneDrive/Documents/Facultate/anul2/sem2/pao/proiect/Orar/lib/mysql-connector-j-8.0.33.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/victo/OneDrive/Documents/Facultate/anul2/sem2/pao/proiect/Orar/lib/mysql-connector-j-8.0.33.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\victo\OneDrive\Documents\Facultate\anul2\sem2\pao\proiect\Orar\src\Models\Student" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -97,7 +121,10 @@
       <workItem from="1681896995931" duration="171000" />
       <workItem from="1683976306125" duration="5859000" />
       <workItem from="1684068758742" duration="9000" />
-      <workItem from="1684261606280" duration="551000" />
+      <workItem from="1684261606280" duration="1782000" />
+      <workItem from="1684413910944" duration="10000" />
+      <workItem from="1684669919951" duration="1079000" />
+      <workItem from="1685012325769" duration="32502000" />
     </task>
     <task id="LOCAL-00001" summary="etapa 1">
       <created>1680820770112</created>
@@ -106,7 +133,35 @@
       <option name="project" value="LOCAL" />
       <updated>1680820770112</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="audit service">
+      <created>1684262390660</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1684262390660</updated>
+    </task>
+    <task id="LOCAL-00003" summary="create tables">
+      <created>1685022827797</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685022827797</updated>
+    </task>
+    <task id="LOCAL-00004" summary="refactoring">
+      <created>1685028162320</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685028162320</updated>
+    </task>
+    <task id="LOCAL-00005" summary="easy queries">
+      <created>1685032277739</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685032277739</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,7 +178,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/master" />
+                        <option value="database" />
                       </list>
                     </value>
                   </entry>
@@ -137,7 +192,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="etapa 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="etapa 1" />
+    <MESSAGE value="audit service" />
+    <MESSAGE value="create tables" />
+    <MESSAGE value="refactoring" />
+    <MESSAGE value="easy queries" />
+    <option name="LAST_COMMIT_MESSAGE" value="easy queries" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -146,6 +205,21 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Models/Sala/SalaDatabase.java</url>
+          <line>143</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Services/MainService.java</url>
+          <line>238</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Services/MainService.java</url>
+          <line>112</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
