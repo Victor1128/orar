@@ -6,6 +6,7 @@ import Models.Profesor.Profesor;
 import Models.Sala.Sala;
 import Models.Serie.Serie;
 
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,10 +30,19 @@ public class Curs extends Ora{
     }
 
     public Curs(Scanner in, List<Profesor> profesori, List<Materie> materii, List<Sala> sali, List<Serie> serii){
-        super(in, profesori, materii, sali);
+        super(in, profesori, materii);
+        readCurs(in, sali, serii);
     }
 
-    public void read(Scanner in, List<Sala> sali, List<Serie> serii){
+    public Curs(ResultSet rs, Profesor profesor, Materie materie, Sala sala, Serie serie){
+        super(rs);
+        this.profesor = profesor;
+        this.materie = materie;
+        this.sala = sala;
+        this.serie = serie;
+    }
+
+    public void readCurs(Scanner in, List<Sala> sali, List<Serie> serii){
         sala = selectSala(in, sali);
         System.out.println("Seria: ");
         int optiune = selectFromMultipleChoices(in, serii, "o serie: ");
@@ -52,6 +62,12 @@ public class Curs extends Ora{
 
     public void setSerie(Serie serie) {
         this.serie = serie;
+    }
+
+    @Override
+    public String toString(){
+        String s = super.toString();
+        return s.substring(0, s.indexOf('\n')) + " ---- Curs\n" + s.substring(s.indexOf('\n') + 1);
     }
 
 }

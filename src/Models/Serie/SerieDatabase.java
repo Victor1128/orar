@@ -20,7 +20,7 @@ public class SerieDatabase {
     }
 
     public int add(Serie serie) throws SQLException {
-        String query = "INSERT INTO serii(\"name\", grupe) VALUES(?, ?)";
+        String query = "INSERT INTO serii(name, grupe) VALUES(?,?)";
         var preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, serie.getName());
         preparedStatement.setString(2, stringFromList(serie.getGrupe()));

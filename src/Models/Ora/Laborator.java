@@ -5,6 +5,7 @@ import Models.Profesor.Profesor;
 import Models.Sala.Sala;
 import Models.Sala.SalaLaborator;
 
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,11 +25,19 @@ public class Laborator extends Ora{
     }
 
     public Laborator(Scanner in, List<Profesor> profesori, List<Materie> materii, List<Sala> sali){
-        super(in, profesori, materii, sali);
-        read(in, profesori, materii, sali);
+        super(in, profesori, materii);
+        readLab(in, sali);
     }
 
-    public void read(Scanner in, List<Profesor> profesori, List<Materie> materii, List<Sala> sali){
+    public Laborator(ResultSet rs, Profesor profesor, Materie materie, Sala sala, String grupa){
+        super(rs);
+        this.profesor = profesor;
+        this.materie = materie;
+        this.sala = sala;
+        this.grupa = grupa;
+    }
+
+    public void readLab(Scanner in, List<Sala> sali){
         List<SalaLaborator> saliPosibile = getSaliPosibile(sali).stream().map(s -> (SalaLaborator) s).filter(s -> s.getMateriiPosibile().contains(materie)).toList();
         int optiune = selectFromMultipleChoices(in, saliPosibile, "sala de laborator");
         sala = saliPosibile.get(optiune);
@@ -50,7 +59,9 @@ public class Laborator extends Ora{
         this.grupa = grupa;
     }
 
-    public void read(Scanner in){
-
+    @Override
+    public String toString(){
+        String s = super.toString();
+        return s.substring(0, s.indexOf('\n')) + " ---- Laborator\n" + s.substring(s.indexOf('\n') + 1);
     }
 }

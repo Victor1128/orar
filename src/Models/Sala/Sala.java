@@ -2,6 +2,7 @@ package Models.Sala;
 
 import util.ClassWithName;
 
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 public abstract class Sala implements ClassWithName {
@@ -23,6 +24,16 @@ public abstract class Sala implements ClassWithName {
 
     public Sala(Scanner in){
         read(in);
+    }
+
+    public Sala(ResultSet rs){
+        try{
+            id = rs.getLong("id");
+            name = rs.getString("name");
+            capacity = rs.getInt("capacity");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void read(Scanner in){

@@ -6,6 +6,7 @@ import Models.Sala.Amfiteatru;
 import Models.Sala.Sala;
 import Models.Sala.SalaSeminar;
 
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,11 +24,19 @@ public class Seminar extends Ora{
     }
 
     public Seminar(Scanner in, List<Profesor> profesori, List<Materie> materii, List<Sala> sali){
-        super(in, profesori, materii, sali);
-        read(in, profesori, materii, sali);
+        super(in, profesori, materii);
+        readSeminar(in, sali);
     }
 
-    public void read(Scanner in, List<Profesor> profesori, List<Materie> materii, List<Sala> sali){
+    public Seminar(ResultSet rs, Profesor profesor, Materie materie, Sala sala, String grupa){
+        super(rs);
+        this.profesor = profesor;
+        this.materie = materie;
+        this.sala = sala;
+        this.grupa = grupa;
+    }
+
+    public void readSeminar(Scanner in, List<Sala> sali){
         sala = selectSala(in, sali);
         System.out.println("Grupa: ");
         grupa = in.nextLine();
@@ -45,5 +54,11 @@ public class Seminar extends Ora{
 
     public void setGrupa(String grupa) {
         this.grupa = grupa;
+    }
+
+    @Override
+    public String toString(){
+        String s = super.toString();
+        return s.substring(0, s.indexOf('\n')) + " ---- Seminar\n" + s.substring(s.indexOf('\n') + 1);
     }
 }

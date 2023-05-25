@@ -1,5 +1,6 @@
 package Models.Sala;
 
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class SalaSeminar extends Sala {
@@ -10,4 +11,6 @@ public class SalaSeminar extends Sala {
     public SalaSeminar(Scanner in){
         super(in);
     }
+
+    public SalaSeminar(ResultSet rs){super(rs);}
 }

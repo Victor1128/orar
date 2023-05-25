@@ -4,6 +4,7 @@ import util.ClassWithName;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Materie implements ClassWithName {
@@ -48,10 +49,17 @@ public class Materie implements ClassWithName {
         try {
             id = rs.getLong("id");
             name = rs.getString("name");
-            nrCredite = rs.getInt("nr_credite");
-            nrOreCurs = rs.getInt("nr_ore_curs");
-            nrOreSeminar = rs.getInt("nr_ore_seminar");
-            nrOreLaborator = rs.getInt("nr_ore_laborator");
+            try {
+                nrCredite = rs.getInt("nr_credite");
+                nrOreCurs = rs.getInt("nr_ore_curs");
+                nrOreSeminar = rs.getInt("nr_ore_seminar");
+                nrOreLaborator = rs.getInt("nr_ore_laborator");
+            } catch (SQLException ex) {
+                nrCredite = 0;
+                nrOreCurs = 0;
+                nrOreSeminar = 0;
+                nrOreLaborator = 0;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -137,5 +145,33 @@ public class Materie implements ClassWithName {
     public void readSimple(Scanner in){
         System.out.println("Numele materiei: ");
         this.name = in.nextLine();
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Materie m))
+            return false;
+        return this.id.equals(m.getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Materie{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", nrCredite=" + nrCredite +
+                ", nrOreCurs=" + nrOreCurs +
+                ", nrOreSeminar=" + nrOreSeminar +
+                ", nrOreLaborator=" + nrOreLaborator +
+                '}';
     }
 }

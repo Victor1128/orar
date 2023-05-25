@@ -5,6 +5,7 @@ import util.ClassWithName;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ import static util.Utils.selectFromMultipleChoices;
 public class Profesor implements ClassWithName {
     private Long id = null;
     private String name;
-    private List<Materie> materii;
+    private List<Materie> materii = new ArrayList<>();
 
     public Profesor(Long id, String name, List<Materie> materii) {
         this.id = id;
@@ -83,6 +84,22 @@ public class Profesor implements ClassWithName {
 
     public void removeMaterie(Materie materie) {
         this.materii.remove(materie);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 37;
+        int result = 1;
+        result = prime * result
+                + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Profesor p))
+            return false;
+        return this.getId().equals(p.getId());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package Models.Sala;
 
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class Amfiteatru extends Sala {
@@ -10,5 +11,6 @@ public class Amfiteatru extends Sala {
     public Amfiteatru(Scanner in){
         super(in);
     }
+    public Amfiteatru(ResultSet rs){super(rs);}
 
 }

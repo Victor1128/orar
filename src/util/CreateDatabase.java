@@ -88,7 +88,7 @@ public class CreateDatabase {
     public static void createAmfiteatreTable(){
         try{
              connection.createStatement().execute("CREATE TABLE IF NOT EXISTS amfiteatre(" +
-                    "id INT PRIMARY KEY AUTO_INCREMENT REFERENCES sali(id)ON DELETE CASCADE)"
+                    "id INT PRIMARY KEY REFERENCES sali(id)ON DELETE CASCADE)"
             );
         }catch(SQLException e){
             e.printStackTrace();
@@ -98,7 +98,7 @@ public class CreateDatabase {
     public static void createSaliLaboratorTable(){
         try{
              connection.createStatement().execute("CREATE TABLE IF NOT EXISTS sali_laborator(" +
-                    "id INT PRIMARY KEY AUTO_INCREMENT REFERENCES sali(id)ON DELETE CASCADE)"
+                    "id INT PRIMARY KEY REFERENCES sali(id)ON DELETE CASCADE)"
             );
         }catch (SQLException e){
             e.printStackTrace();
@@ -122,7 +122,7 @@ public class CreateDatabase {
     public static void createSaliSeminarTable(){
         try{
              connection.createStatement().execute("CREATE TABLE IF NOT EXISTS sali_seminar(" +
-                    "id INT PRIMARY KEY AUTO_INCREMENT REFERENCES sali(id)ON DELETE CASCADE)"
+                    "id INT PRIMARY KEY REFERENCES sali(id)ON DELETE CASCADE)"
             );
         }catch(SQLException e){
             e.printStackTrace();
@@ -149,7 +149,7 @@ public class CreateDatabase {
     public static void createCursTable(){
         try{
              connection.createStatement().execute("CREATE TABLE IF NOT EXISTS cursuri(" +
-                    "id INT PRIMARY KEY AUTO_INCREMENT REFERENCES ore(id) ON DELETE CASCADE," +
+                    "id INT PRIMARY KEY REFERENCES ore(id) ON DELETE CASCADE," +
                     "serie_id INT NOT NULL REFERENCES serii(id) ON DELETE CASCADE)"
             );
         }catch(SQLException e){
@@ -159,7 +159,7 @@ public class CreateDatabase {
     public static void createSeminarTable(){
         try{
             connection.createStatement().execute("CREATE TABLE IF NOT EXISTS seminare(" +
-                    "id INT PRIMARY KEY AUTO_INCREMENT REFERENCES ore(id)ON DELETE CASCADE," +
+                    "id INT PRIMARY KEY REFERENCES ore(id)ON DELETE CASCADE," +
                     "grupa VARCHAR(50) NOT NULL)"
             );
         }catch(SQLException e){
@@ -170,7 +170,7 @@ public class CreateDatabase {
     public static void createLaboratorTable(){
         try{
              connection.createStatement().execute("CREATE TABLE IF NOT EXISTS laboratoare(" +
-                    "id INT PRIMARY KEY AUTO_INCREMENT REFERENCES ore(id)ON DELETE CASCADE," +
+                    "id INT PRIMARY KEY REFERENCES ore(id)ON DELETE CASCADE," +
                     "grupa VARCHAR(50) NOT NULL)"
             );
         }catch(SQLException e){

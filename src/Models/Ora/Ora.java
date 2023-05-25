@@ -5,6 +5,7 @@ import Models.Profesor.Profesor;
 import Models.Sala.Sala;
 import Models.Serie.Serie;
 
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Scanner;
 
@@ -61,12 +62,23 @@ public abstract class Ora implements Comparable<Ora> {
         this.ziuaSaptamanii = ziuaSaptamanii;
     }
 
-    public Ora(Scanner in, List<Profesor> profesori, List<Materie> materii, List<Sala> sali){
-        read(in, profesori, materii, sali);
+    public Ora(Scanner in, List<Profesor> profesori, List<Materie> materii){
+        read(in, profesori, materii);
     }
 
+    public Ora(ResultSet rs){
+        try {
+            id = rs.getLong("id");
+            oraInceput = rs.getInt("ora_inceput");
+            oraSfarsit = rs.getInt("ora_sfarsit");
+            ziuaSaptamanii = rs.getInt("ziua_saptamanii");
+            frecventa = rs.getString("frecventa");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
-    public void read(Scanner in, List<Profesor> profesori, List<Materie> materii, List<Sala> sali){
+    public void read(Scanner in, List<Profesor> profesori, List<Materie> materii){
         int optiune = selectFromMultipleChoices(in, materii, "o materie");
         materie = materii.get(optiune);
         List<Profesor> profesoriPosibili = profesori.stream().filter(profesor -> profesor.getMaterii().contains(materie)).toList();
@@ -170,9 +182,9 @@ public abstract class Ora implements Comparable<Ora> {
 
     public String toStringProfesor(){
         if(this instanceof Laborator || this instanceof Seminar)
-            return materie.getName() + "\n\tGrupa: " + this.getGrupa() + "\n\tSala: " + sala.getName() + "\n\tOra: " + oraInceput + " - " + oraSfarsit + "\n\n";
+            return materie.getName() + "\n\tGrupa: " + this.getGrupa() + "\n\tSala: " + sala.getName() + "\n\tOra: " + oraInceput + " - " + oraSfarsit + "\n";
         else if(this instanceof Curs)
-            return materie.getName() + "\n\tSerie: " + this.getSerie() + "\n\tSala: " + sala.getName() + "\n\tOra: " + oraInceput + " - " + oraSfarsit + "\n\n";
+            return materie.getName() + "\n\tSerie: " + this.getSerie() + "\n\tSala: " + sala.getName() + "\n\tOra: " + oraInceput + " - " + oraSfarsit + "\n";
         return "Ora nu e definita";
     }
 
@@ -183,5 +195,22 @@ public abstract class Ora implements Comparable<Ora> {
     public Serie getSerie(){
         return null;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 29;
+        int result = 1;
+        result = prime * result
+                + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Materie m))
+            return false;
+        return this.id.equals(m.getId());
+    }
+
 
 }

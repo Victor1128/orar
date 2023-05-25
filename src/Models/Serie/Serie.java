@@ -4,6 +4,7 @@ import util.ClassWithName;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ import static util.Utils.listFromString;
 public class Serie implements ClassWithName {
     private Long id;
     private String name;
-    private List<String> grupe;
+    private List<String> grupe = new ArrayList<>();
 
     public Serie(String name, List<String> grupe) {
         this.name = name;
@@ -82,5 +83,14 @@ public class Serie implements ClassWithName {
 
     public Boolean contains(String grupa){
         return Collections.binarySearch(grupe, grupa) >= 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Serie{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", grupe=" + grupe +
+                '}';
     }
 }

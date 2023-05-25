@@ -4,28 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14f0c086-36fe-4c98-b058-94d7f0fee81e" name="Changes" comment="refactoring">
+    <list default="true" id="14f0c086-36fe-4c98-b058-94d7f0fee81e" name="Changes" comment="easy queries">
       <change afterPath="$PROJECT_DIR$/config/secret.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Materie/MaterieDatabase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Profesor/ProfesorDatabase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Serie/SerieDatabase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Models/Ora/OraDatabase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Models/Sala/SalaDatabase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/audit.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/audit.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Materie/Materie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Materie/Materie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Ora/Curs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Ora/Curs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Ora/Laborator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Ora/Laborator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Ora/Ora.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Ora/Ora.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Ora/Seminar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Ora/Seminar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Profesor/Profesor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Profesor/Profesor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Profesor/ProfesorDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Profesor/ProfesorDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Sala/Amfiteatru.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Sala/Amfiteatru.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Sala/Sala.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Sala/Sala.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Sala/SalaLaborator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Sala/SalaLaborator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Sala/SalaSeminar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Sala/SalaSeminar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Serie/Serie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Serie/Serie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Serie/SerieDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Serie/SerieDatabase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Student/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Student/StudentDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Student/StudentDatabase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Services/MainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/MainService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/ClassWithName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/ClassWithName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/CreateDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/CreateDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/CreateDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/CreateDatabase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +124,7 @@
       <workItem from="1684261606280" duration="1782000" />
       <workItem from="1684413910944" duration="10000" />
       <workItem from="1684669919951" duration="1079000" />
-      <workItem from="1685012325769" duration="17417000" />
+      <workItem from="1685012325769" duration="32502000" />
     </task>
     <task id="LOCAL-00001" summary="etapa 1">
       <created>1680820770112</created>
@@ -153,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685028162320</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="easy queries">
+      <created>1685032277739</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685032277739</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +195,8 @@
     <MESSAGE value="audit service" />
     <MESSAGE value="create tables" />
     <MESSAGE value="refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
+    <MESSAGE value="easy queries" />
+    <option name="LAST_COMMIT_MESSAGE" value="easy queries" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -196,6 +205,21 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Models/Sala/SalaDatabase.java</url>
+          <line>143</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Services/MainService.java</url>
+          <line>238</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Services/MainService.java</url>
+          <line>112</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

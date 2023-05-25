@@ -36,7 +36,7 @@ public class Student {
         try{
             id = rs.getLong("id");
             name = rs.getString("name");
-            birthDate = rs.getDate("birth_date").toLocalDate();
+            birthDate = rs.getDate("birthdate").toLocalDate();
             grupa = rs.getString("grupa");
             studyYear = rs.getInt("study_year");
         }catch (SQLException e){

@@ -2,13 +2,15 @@ package Models.Sala;
 
 import Models.Materie.Materie;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import static util.Utils.selectFromMultipleChoices;
 
 public class SalaLaborator extends Sala {
-    private List<Materie> materiiPosibile;
+    private List<Materie> materiiPosibile = new ArrayList<>();
 
 
     public SalaLaborator(String nume, int capacitate, List<Materie> materiiPosibile) {
@@ -24,6 +26,8 @@ public class SalaLaborator extends Sala {
         super(in);
         read(in, materii);
     }
+
+    public SalaLaborator(ResultSet rs){super(rs);}
 
     public void read(Scanner in, List<Materie> materii) {
         System.out.println("Numar de materii posibile in laborator: ");
