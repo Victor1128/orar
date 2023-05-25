@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 import Services.AuditService;
 import Services.MainService;
+import util.CreateDatabase;
+import util.DatabaseConnection;
 
 public class Main {
     private final static List<String> availableCommands = Arrays.asList("add_student", "add_profesor", "add_materie", "add_serie", "add_sala", "add_ora", "get_student", "get_profsor", "show_orar_student", "show_orar_student_azi", "show_orar_profesor", "show_orar_profesor_azi", "help", "exit");
@@ -17,32 +19,28 @@ public class Main {
             System.out.println((i+1) + ". " + " (" + availableCommands.get(i) + ")");
     }
 
-    public static Connection getConnection(){
-        Connection connection = null;
-        try {
-            File file = new File("config/secret.txt");
-            Scanner in = new Scanner(file);
-            String url = in.nextLine();
-            String username = in.nextLine();
-            String password = in.nextLine();
-            connection = DriverManager.getConnection(url, username, password);
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Test");
-            while(resultSet.next()){
-                System.out.println(resultSet.getString(1));
-            }
-        } catch (SQLException | FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return connection;
-    }
+//    public static Connection getConnection(){
+//        Connection connection = null;
+//        try {
+//            connection = DatabaseConnection.getInstance().getConnection();
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery("SELECT * FROM Test");
+//            while(resultSet.next()){
+//                System.out.println(resultSet.getString(1));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return connection;
+//    }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         MainService mainService = new MainService();
         AuditService auditService = new AuditService();
         boolean exit = false;
-        getConnection();
+//        getConnection();
+        CreateDatabase.createAll();
         while(!exit){
             System.out.println("Introduceti comanda:");
             String command = in.nextLine();

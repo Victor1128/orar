@@ -1,16 +1,18 @@
-package Models;
+package Models.Materie;
+
+import util.ClassWithName;
 
 import java.util.Scanner;
 
-public class Materie {
-    private String nume;
+public class Materie implements ClassWithName {
+    private String name;
     private int nrCredite;
     private int nrOreCurs;
     private int nrOreSeminar;
     private int nrOreLaborator;
 
-    public Materie(String nume, int nrCredite, int nrOre, int nrOreSeminar, int nrOreLaborator) {
-        this.nume = nume;
+    public Materie(String name, int nrCredite, int nrOre, int nrOreSeminar, int nrOreLaborator) {
+        this.name = name;
         this.nrCredite = nrCredite;
         this.nrOreCurs = nrOre;
         this.nrOreSeminar = nrOreSeminar;
@@ -19,16 +21,17 @@ public class Materie {
 
     public Materie() {}
 
-    public Materie(String nume) {
-        this.nume = nume;
+    public Materie(String name) {
+        this.name = name;
+    }
+    @Override
+
+    public String getName() {
+        return name;
     }
 
-    public String getNume() {
-        return nume;
-    }
-
-    public void setNume(String nume) {
-        this.nume = nume;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getNrCredite() {
@@ -65,7 +68,7 @@ public class Materie {
 
     public void read(Scanner in){
         System.out.println("Numele materiei: ");
-        this.nume = in.nextLine();
+        this.name = in.nextLine();
         System.out.println("Numarul de credite: ");
         this.nrCredite = Integer.parseInt(in.nextLine());
         System.out.println("Numarul de ore de curs: ");
@@ -78,6 +81,6 @@ public class Materie {
 
     public void readSimple(Scanner in){
         System.out.println("Numele materiei: ");
-        this.nume = in.nextLine();
+        this.name = in.nextLine();
     }
 }

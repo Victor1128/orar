@@ -1,8 +1,11 @@
-package Models;
+package Models.Ora;
 
-import java.util.Locale;
+import Models.Materie.Materie;
+import Models.Profesor.Profesor;
+import Models.Sala.Sala;
+import Models.Serie.Serie;
 
-public class Ora implements Comparable<Ora> {
+public abstract class Ora implements Comparable<Ora> {
     protected Materie materie;
     protected Profesor profesor;
     protected Sala sala;
@@ -93,14 +96,14 @@ public class Ora implements Comparable<Ora> {
 
     @Override
     public String toString() {
-        return materie.getNume() + "\n\tProfesor: " + profesor.getName() + "\n\tSala: " + sala.getNume() + "\n\tOra: " + oraInceput + " - " + oraSfarsit + "\n\n";
+        return materie.getName() + "\n\tProfesor: " + profesor.getName() + "\n\tSala: " + sala.getName() + "\n\tOra: " + oraInceput + " - " + oraSfarsit + "\n\n";
     }
 
     public String toStringProfesor(){
         if(this instanceof Laborator || this instanceof Seminar)
-            return materie.getNume() + "\n\tGrupa: " + this.getGrupa() + "\n\tSala: " + sala.getNume() + "\n\tOra: " + oraInceput + " - " + oraSfarsit + "\n\n";
+            return materie.getName() + "\n\tGrupa: " + this.getGrupa() + "\n\tSala: " + sala.getName() + "\n\tOra: " + oraInceput + " - " + oraSfarsit + "\n\n";
         else if(this instanceof Curs)
-            return materie.getNume() + "\n\tSerie: " + this.getSerie() + "\n\tSala: " + sala.getNume() + "\n\tOra: " + oraInceput + " - " + oraSfarsit + "\n\n";
+            return materie.getName() + "\n\tSerie: " + this.getSerie() + "\n\tSala: " + sala.getName() + "\n\tOra: " + oraInceput + " - " + oraSfarsit + "\n\n";
         return "Ora nu e definita";
     }
 

@@ -1,10 +1,12 @@
-package Models;
+package Models.Profesor;
+
+import Models.Materie.Materie;
+import util.ClassWithName;
 
 import java.util.List;
 
-public class Profesor {
-    private final Long id;
-    private static Long idCounter = 0L;
+public class Profesor implements ClassWithName {
+    private Long id = null;
     private String name;
     private List<Materie> materii;
 
@@ -15,7 +17,6 @@ public class Profesor {
     }
 
     public Profesor(String name, List<Materie> materii) {
-        this.id = idCounter++;
         this.name = name;
         this.materii = materii;
     }
@@ -24,6 +25,11 @@ public class Profesor {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
     public String getName() {
         return name;
     }

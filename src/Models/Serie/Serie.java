@@ -1,24 +1,26 @@
-package Models;
+package Models.Serie;
+
+import util.ClassWithName;
 
 import java.util.Collections;
 import java.util.List;
 
-public class Serie {
-    private String nume;
+public class Serie implements ClassWithName {
+    private String name;
     private List<String> grupe;
 
-    public Serie(String nume, List<String> grupe) {
-        this.nume = nume;
+    public Serie(String name, List<String> grupe) {
+        this.name = name;
         Collections.sort(grupe);
         this.grupe = grupe;
     }
 
-    public String getNume() {
-        return nume;
+    public String getName() {
+        return name;
     }
 
-    public void setNume(String nume) {
-        this.nume = nume;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<String> getGrupe() {

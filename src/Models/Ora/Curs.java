@@ -1,4 +1,9 @@
-package Models;
+package Models.Ora;
+
+import Models.Sala.Amfiteatru;
+import Models.Materie.Materie;
+import Models.Profesor.Profesor;
+import Models.Serie.Serie;
 
 public class Curs extends Ora{
     private Serie serie;

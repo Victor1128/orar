@@ -1,4 +1,8 @@
-package Models;
+package Models.Ora;
+
+import Models.Materie.Materie;
+import Models.Profesor.Profesor;
+import Models.Sala.SalaSeminar;
 
 public class Seminar extends Ora{
     private String grupa;

@@ -1,4 +1,6 @@
-package Models;
+package Models.Sala;
+
+import Models.Materie.Materie;
 
 import java.util.List;
 

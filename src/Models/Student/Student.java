@@ -1,11 +1,10 @@
-package Models;
+package Models.Student;
 
 import java.time.LocalDate;
 
 public class Student {
-    private final Long id;
+    private Long id = null;
 
-    private static Long idCounter = 0L;
     private String name;
     private LocalDate birthDate;
     private String grupa;
@@ -20,7 +19,6 @@ public class Student {
     }
 
     public Student(String name, LocalDate birthDate, String grupa, int studyYear) {
-        this.id = idCounter++;
         this.name = name;
         this.birthDate = birthDate;
         this.grupa = grupa;
@@ -29,6 +27,10 @@ public class Student {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -4,7 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import Models.*;
+import Models.Materie.Materie;
+import Models.Ora.Curs;
+import Models.Ora.Laborator;
+import Models.Ora.Ora;
+import Models.Ora.Seminar;
+import Models.Profesor.Profesor;
+import Models.Sala.Amfiteatru;
+import Models.Sala.Sala;
+import Models.Sala.SalaLaborator;
+import Models.Sala.SalaSeminar;
+import Models.Serie.Serie;
+import Models.Student.Student;
+import util.ClassWithName;
 
 public class MainService {
     private List<Student> studenti = new ArrayList<>();
@@ -47,15 +59,7 @@ public class MainService {
         int nrMaterii = Integer.parseInt(in.nextLine());
         List<Materie> materiiProfesor = new ArrayList<>();
         for (int i = 0; i < nrMaterii; i++) {
-            int optiune = -1;
-            while(optiune < 0 || optiune >= materii.size()) {
-                System.out.println("Selectati o materie: ");
-                for (int j = 0; j < materii.size(); j++) {
-                    System.out.println((j + 1) + ". " + materii.get(j).getNume());
-                }
-                optiune = Integer.parseInt(in.nextLine());
-                optiune--;
-            }
+            int optiune = selectFromMultipleChoices(in, materii, "Materie " + (i + 1) + ": ");
             materiiProfesor.add(materii.get(optiune));
         }
         profesori.add(new Profesor(nume, materiiProfesor));
@@ -114,43 +118,19 @@ public class MainService {
             tip = Integer.parseInt(in.nextLine());
         }
         final int finalTip = tip;
-        int optiune = -1;
-        while(optiune < 0 || optiune >= materii.size()) {
-            System.out.println("Selectati o materie: ");
-            for (int i = 0; i < materii.size(); i++) {
-                System.out.println((i + 1) + ". " + materii.get(i).getNume());
-            }
-            optiune = Integer.parseInt(in.nextLine());
-            optiune--;
-        }
+        int optiune = selectFromMultipleChoices(in, materii, "o materie: ");
         Materie m = materii.get(optiune);
         List<Profesor> profesoriPosibili = profesori.stream().filter(profesor -> profesor.getMaterii().contains(m)).toList();
-        optiune = -1;
-        while(optiune < 0 || optiune >= profesoriPosibili.size()) {
-            System.out.println("Selectati un profesor: ");
-            for (int i = 0; i < profesoriPosibili.size(); i++) {
-                System.out.println((i + 1) + ". " + profesoriPosibili.get(i).getName());
-            }
-            optiune = Integer.parseInt(in.nextLine());
-            optiune--;
-        }
+        optiune = selectFromMultipleChoices(in, profesoriPosibili, "un profesor: ");
         Profesor p = profesoriPosibili.get(optiune);
         System.out.println("Selectati o sala: ");
-        optiune = -1;
-        List<Sala> saliPosibile = new ArrayList<>();
+        List<Sala> saliPosibile;
         saliPosibile = sali.stream().filter(sala -> sala.getClass() == tipuriSali.get(finalTip)).toList();
         if (saliPosibile.size() == 0) {
             System.out.println("Nu exista nicio sala pentru aceasta ora!");
             return;
         }
-        while(optiune < 0 || optiune >= sali.size()) {
-            System.out.println("Selectati o sala: ");
-            for (int i = 0; i < saliPosibile.size(); i++) {
-                System.out.println((i + 1) + ". " + saliPosibile.get(i).getNume());
-            }
-            optiune = Integer.parseInt(in.nextLine());
-            optiune--;
-        }
+        optiune = selectFromMultipleChoices(in, saliPosibile, "o sala: ");
         Sala s = saliPosibile.get(optiune);
         System.out.println("Ora inceput: ");
         int oraInceput = Integer.parseInt(in.nextLine());
@@ -172,15 +152,7 @@ public class MainService {
         }
         else {
             System.out.println("Seria: ");
-            optiune = -1;
-            while(optiune < 0 || optiune >= serii.size()) {
-                System.out.println("Selectati o serie: ");
-                for (int i = 0; i < serii.size(); i++) {
-                    System.out.println((i + 1) + ". " + serii.get(i).getNume());
-                }
-                optiune = Integer.parseInt(in.nextLine());
-                optiune--;
-            }
+            optiune = selectFromMultipleChoices(in, serii, "o serie: ");
             serie = serii.get(optiune);
         }
         switch (tip){
@@ -205,6 +177,19 @@ public class MainService {
             }
             }
         System.out.println("Ora a fost adaugata cu succes!");
+    }
+
+    private int selectFromMultipleChoices(Scanner in, List<? extends ClassWithName> list, String message){
+        int optiune = -1;
+        while(optiune < 0 || optiune >= materii.size()) {
+            System.out.println("Selectati " + message + ": ");
+            for (int i = 0; i < materii.size(); i++) {
+                System.out.println((i + 1) + ". " + list.get(i).getName());
+            }
+            optiune = Integer.parseInt(in.nextLine());
+            optiune--;
+        }
+        return optiune;
     }
 
     public Student findStudentById(Long id){
