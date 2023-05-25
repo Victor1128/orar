@@ -1,9 +1,12 @@
 package Models.Profesor;
 
 import Models.Materie.Materie;
-import util.ClassWithName;
+import utils.ClassWithName;
 
 import java.util.List;
+import java.util.Scanner;
+
+import static utils.Utils.selectFromMultipleChoices;
 
 public class Profesor implements ClassWithName {
     private Long id = null;
@@ -19,6 +22,21 @@ public class Profesor implements ClassWithName {
     public Profesor(String name, List<Materie> materii) {
         this.name = name;
         this.materii = materii;
+    }
+
+    public Profesor(Scanner in, List<Materie> materii){
+        read(in, materii);
+    }
+
+    public void read(Scanner in, List<Materie> materii) {
+        System.out.println("Nume: ");
+        name = in.nextLine();
+        System.out.println("Numar de materii: ");
+        int nrMaterii = Integer.parseInt(in.nextLine());
+        for (int i = 0; i < nrMaterii; i++) {
+            int optiune = selectFromMultipleChoices(in, materii, "Materie " + (i + 1) + ": ");
+            this.materii.add(materii.get(optiune));
+        }
     }
 
     public Long getId() {

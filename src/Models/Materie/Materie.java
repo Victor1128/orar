@@ -1,6 +1,6 @@
 package Models.Materie;
 
-import util.ClassWithName;
+import utils.ClassWithName;
 
 import java.util.Scanner;
 
@@ -19,7 +19,16 @@ public class Materie implements ClassWithName {
         this.nrOreLaborator = nrOreLaborator;
     }
 
+    public Materie(Scanner in, String opt) {
+        switch (opt) {
+            case "Simple" -> readSimple(in);
+            case "Full" -> read(in);
+            default -> throw new IllegalArgumentException("Optiunea nu exista");
+        }
+    }
+
     public Materie() {}
+
 
     public Materie(String name) {
         this.name = name;

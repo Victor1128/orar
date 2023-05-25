@@ -1,7 +1,6 @@
 package Services;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import Models.Materie.Materie;
@@ -16,7 +15,7 @@ import Models.Sala.SalaLaborator;
 import Models.Sala.SalaSeminar;
 import Models.Serie.Serie;
 import Models.Student.Student;
-import util.ClassWithName;
+import utils.ClassWithName;
 
 public class MainService {
     private List<Student> studenti = new ArrayList<>();
@@ -27,7 +26,6 @@ public class MainService {
     private Map<String, List<Ora>> grupaOreMap = new HashMap<>();
     private Map<Profesor, List<Ora>> profesorOreMap = new HashMap<>();
     private List<Ora> ore = new ArrayList<>();
-    private final List<Class<? extends Sala>> tipuriSali = Arrays.asList(Amfiteatru.class, SalaLaborator.class, SalaSeminar.class);
     private final List<String> zileleSaptamanii = Arrays.asList("Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica");
 
     private void addOraToMaps(Profesor p, String grupa) {
@@ -39,75 +37,42 @@ public class MainService {
         profesorOreMap.get(p).add(ore.get(ore.size() - 1));
     }
     public void createStudent(Scanner in){
-        System.out.println("Nume: ");
-        String nume = in.nextLine();
-        System.out.println("Data nasterii (zz.ll.aaaa): ");
-        String dataNasterii = in.nextLine();
-        System.out.println("Grupa: ");
-        String grupa = in.nextLine();
-        System.out.println("An studiu: ");
-        int anStudiu = Integer.parseInt(in.nextLine());
-        LocalDate dataNasterii2 = LocalDate.parse(dataNasterii, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        studenti.add(new Student(nume, dataNasterii2, grupa, anStudiu));
+        Student student = new Student(in);
+        studenti.add(student);
         System.out.println("Studentul a fost creat cu succes!");
     }
 
     public void createProfesor(Scanner in){
-        System.out.println("Nume: ");
-        String nume = in.nextLine();
-        System.out.println("Numar de materii: ");
-        int nrMaterii = Integer.parseInt(in.nextLine());
-        List<Materie> materiiProfesor = new ArrayList<>();
-        for (int i = 0; i < nrMaterii; i++) {
-            int optiune = selectFromMultipleChoices(in, materii, "Materie " + (i + 1) + ": ");
-            materiiProfesor.add(materii.get(optiune));
-        }
-        profesori.add(new Profesor(nume, materiiProfesor));
+        Profesor profesor = new Profesor(in, materii);
+        profesori.add(profesor);
         System.out.println("Profesorul a fost creat cu succes!");
     }
 
     public void createSerie(Scanner in) {
-        System.out.println("Nume: ");
-        String nume = in.nextLine();
-        System.out.println("Numar de grupe: ");
-        int nrGrupe = Integer.parseInt(in.nextLine());
-        List<String> grupe = new ArrayList<>();
-        for (int i = 0; i < nrGrupe; i++) {
-            System.out.println("Grupa " + (i + 1) + ": ");
-            String grupa = in.nextLine();
-            grupe.add(grupa);
-        }
-        serii.add(new Serie(nume, grupe));
+        Serie serie = new Serie(in);
+        serii.add(serie);
         System.out.println("Serie creata cu succes!");
     }
 
     public void createMaterie(Scanner in){
-        Materie m = new Materie();
-        m.readSimple(in);
-        materii.add(m);
+        Materie materie = new Materie(in, "Simple");
+        materii.add(materie);
         System.out.println("Materia a fost creata cu succes!");
     }
 
     public void createSala(Scanner in){
-        System.out.println("Nume: ");
-        String nume = in.nextLine();
-        System.out.println("Numar de locuri: ");
-        int nrLocuri = Integer.parseInt(in.nextLine());
+
         int optiune = -1;
         while(optiune < 0 || optiune > 2) {
             System.out.println("Tip (0 - amfiteatru, 1 - laborator, 2 - seminar):");
             optiune = Integer.parseInt(in.nextLine());
         }
         switch (optiune) {
-            case 0 -> sali.add(new Amfiteatru(nume, nrLocuri));
-            case 1 -> sali.add(new SalaLaborator(nume, nrLocuri));
-            case 2 -> sali.add(new SalaSeminar(nume, nrLocuri));
+            case 0 -> sali.add(new Amfiteatru(in));
+            case 1 -> sali.add(new SalaLaborator(in, materii));
+            case 2 -> sali.add(new SalaSeminar(in));
         }
         System.out.println("Sala a fost creata cu succes!");
-
-//        sali.add(new tipuriSali.get(optiune)(nume, nrLocuri));
-//        Class<? extends Sala> selectedClass = tipuriSali.get(optiune);
-//        Sala s = new selectedClass.getConstructors()[0].newInstance(nume, nrLocuri);
 
     }
 
@@ -117,79 +82,31 @@ public class MainService {
             System.out.println("Tip (0 - curs, 1 - laborator, 2 - seminar):");
             tip = Integer.parseInt(in.nextLine());
         }
-        final int finalTip = tip;
-        int optiune = selectFromMultipleChoices(in, materii, "o materie: ");
-        Materie m = materii.get(optiune);
-        List<Profesor> profesoriPosibili = profesori.stream().filter(profesor -> profesor.getMaterii().contains(m)).toList();
-        optiune = selectFromMultipleChoices(in, profesoriPosibili, "un profesor: ");
-        Profesor p = profesoriPosibili.get(optiune);
-        System.out.println("Selectati o sala: ");
-        List<Sala> saliPosibile;
-        saliPosibile = sali.stream().filter(sala -> sala.getClass() == tipuriSali.get(finalTip)).toList();
-        if (saliPosibile.size() == 0) {
-            System.out.println("Nu exista nicio sala pentru aceasta ora!");
-            return;
-        }
-        optiune = selectFromMultipleChoices(in, saliPosibile, "o sala: ");
-        Sala s = saliPosibile.get(optiune);
-        System.out.println("Ora inceput: ");
-        int oraInceput = Integer.parseInt(in.nextLine());
-        System.out.println("Ora sfarsit: ");
-        int oraSfarsit = Integer.parseInt(in.nextLine());
-        int ziuaSaptamanii = -1;
-        while (ziuaSaptamanii < 1 || ziuaSaptamanii > 7){
-            System.out.println("Ziua saptamanii (1 - 7): ");
-            ziuaSaptamanii = Integer.parseInt(in.nextLine());
-        }
-        ziuaSaptamanii--;
-//        System.out.println("Frecventa: ");
-//        String frecventa = in.nextLine();
-        String grupa = null;
-        Serie serie = null;
-        if(tip != 0){
-            System.out.println("Grupa: ");
-            grupa = in.nextLine();
-        }
-        else {
-            System.out.println("Seria: ");
-            optiune = selectFromMultipleChoices(in, serii, "o serie: ");
-            serie = serii.get(optiune);
-        }
         switch (tip){
             case 0 -> {
-                ore.add(new Curs(m, p, (Amfiteatru) s, oraInceput, oraSfarsit, ziuaSaptamanii, serie));
-                for (String g : serie.getGrupe()) {
+                Curs curs = new Curs(in, profesori, materii, sali, serii);
+                ore.add(curs);
+                for (String g : curs.getSerie().getGrupe()) {
                     if(!grupaOreMap.containsKey(g))
                         grupaOreMap.put(g, new ArrayList<>());
                     grupaOreMap.get(g).add(ore.get(ore.size() - 1));
                 }
-                if(!profesorOreMap.containsKey(p))
-                    profesorOreMap.put(p, new ArrayList<>());
-                profesorOreMap.get(p).add(ore.get(ore.size() - 1));
+                if(!profesorOreMap.containsKey(curs.getProfesor()))
+                    profesorOreMap.put(curs.getProfesor(), new ArrayList<>());
+                profesorOreMap.get(curs.getProfesor()).add(ore.get(ore.size() - 1));
             }
             case 1 -> {
-                ore.add(new Laborator(m, p, (SalaLaborator) s, oraInceput, oraSfarsit, ziuaSaptamanii, grupa));
-                addOraToMaps(p, grupa);
+                Laborator laborator = new Laborator(in, profesori, materii, sali);
+                ore.add(laborator);
+                addOraToMaps(laborator.getProfesor(), laborator.getGrupa());
             }
             case 2 -> {
-                ore.add(new Seminar(m, p, (SalaSeminar) s, oraInceput, oraSfarsit, ziuaSaptamanii, grupa));
-                addOraToMaps(p, grupa);
+                Seminar seminar = new Seminar(in, profesori, materii, sali);
+                ore.add(seminar);
+                addOraToMaps(seminar.getProfesor(), seminar.getGrupa());
             }
             }
         System.out.println("Ora a fost adaugata cu succes!");
-    }
-
-    private int selectFromMultipleChoices(Scanner in, List<? extends ClassWithName> list, String message){
-        int optiune = -1;
-        while(optiune < 0 || optiune >= materii.size()) {
-            System.out.println("Selectati " + message + ": ");
-            for (int i = 0; i < materii.size(); i++) {
-                System.out.println((i + 1) + ". " + list.get(i).getName());
-            }
-            optiune = Integer.parseInt(in.nextLine());
-            optiune--;
-        }
-        return optiune;
     }
 
     public Student findStudentById(Long id){

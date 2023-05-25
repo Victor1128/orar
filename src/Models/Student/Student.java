@@ -1,6 +1,8 @@
 package Models.Student;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class Student {
     private Long id = null;
@@ -23,6 +25,22 @@ public class Student {
         this.birthDate = birthDate;
         this.grupa = grupa;
         this.studyYear = studyYear;
+    }
+
+    public Student(Scanner in){
+        read(in);
+    }
+
+    public void read(Scanner in){
+        System.out.println("Nume: ");
+        name = in.nextLine();
+        System.out.println("Data nasterii (zz.ll.aaaa): ");
+        String dataNasterii = in.nextLine();
+        System.out.println("Grupa: ");
+        grupa = in.nextLine();
+        System.out.println("An studiu: ");
+        studyYear = Integer.parseInt(in.nextLine());
+        birthDate = LocalDate.parse(dataNasterii, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
     public Long getId() {

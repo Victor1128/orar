@@ -5,7 +5,14 @@ import Models.Profesor.Profesor;
 import Models.Sala.Sala;
 import Models.Serie.Serie;
 
+import java.util.List;
+import java.util.Scanner;
+
+import static utils.Utils.selectFromMultipleChoices;
+
 public abstract class Ora implements Comparable<Ora> {
+    protected Long id;
+
     protected Materie materie;
     protected Profesor profesor;
     protected Sala sala;
@@ -13,6 +20,27 @@ public abstract class Ora implements Comparable<Ora> {
     protected int oraSfarsit;
     protected int ziuaSaptamanii;
     protected String frecventa; // SP, SI, all
+
+    public Ora(Long id, Materie materie, Profesor profesor, Sala sala, int oraInceput, int oraSfarsit, int ziuaSaptamanii, String frecventa) {
+        this.id = id;
+        this.materie = materie;
+        this.profesor = profesor;
+        this.sala = sala;
+        this.oraInceput = oraInceput;
+        this.oraSfarsit = oraSfarsit;
+        this.ziuaSaptamanii = ziuaSaptamanii;
+        this.frecventa = frecventa;
+    }
+
+    public Ora(Long id, Materie materie, Profesor profesor, Sala sala, int oraInceput, int oraSfarsit, int ziuaSaptamanii) {
+        this.id = id;
+        this.materie = materie;
+        this.profesor = profesor;
+        this.sala = sala;
+        this.oraInceput = oraInceput;
+        this.oraSfarsit = oraSfarsit;
+        this.ziuaSaptamanii = ziuaSaptamanii;
+    }
 
     public Ora(Materie materie, Profesor profesor, Sala sala, int oraInceput, int oraSfarsit, int ziuaSaptamanii, String frecventa) {
         this.materie = materie;
@@ -33,6 +61,47 @@ public abstract class Ora implements Comparable<Ora> {
         this.ziuaSaptamanii = ziuaSaptamanii;
     }
 
+    public Ora(Scanner in, List<Profesor> profesori, List<Materie> materii, List<Sala> sali){
+        read(in, profesori, materii, sali);
+    }
+
+
+    public void read(Scanner in, List<Profesor> profesori, List<Materie> materii, List<Sala> sali){
+        int optiune = selectFromMultipleChoices(in, materii, "o materie");
+        materie = materii.get(optiune);
+        List<Profesor> profesoriPosibili = profesori.stream().filter(profesor -> profesor.getMaterii().contains(materie)).toList();
+        optiune = selectFromMultipleChoices(in, profesoriPosibili, "un profesor");
+        profesor = profesoriPosibili.get(optiune);
+        System.out.println("Ora inceput: ");
+        oraInceput = Integer.parseInt(in.nextLine());
+        System.out.println("Ora sfarsit: ");
+        oraSfarsit = Integer.parseInt(in.nextLine());
+        ziuaSaptamanii = -1;
+        while (ziuaSaptamanii < 1 || ziuaSaptamanii > 7){
+            System.out.println("Ziua saptamanii (1 - 7): ");
+            ziuaSaptamanii = Integer.parseInt(in.nextLine());
+        }
+        ziuaSaptamanii--;
+    }
+
+    public abstract Class<? extends Sala> getSalaNecesara();
+
+    public List<Sala> getSaliPosibile(List<Sala> sali){
+        return sali.stream().filter(sala -> sala.getClass() == this.getSalaNecesara()).toList();
+    }
+
+    public Sala selectSala(Scanner in, List<Sala> sali){
+        List<Sala> saliPosibile = getSaliPosibile(sali);
+        int optiune = selectFromMultipleChoices(in, saliPosibile, "o sala");
+        return saliPosibile.get(optiune);
+    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     public Materie getMaterie() {
         return materie;
     }
