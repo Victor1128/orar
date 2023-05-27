@@ -47,19 +47,23 @@ public class Materie extends ModelBase implements ClassWithName {
 
     public Materie(ResultSet rs){
         try {
+          try {
+              id = rs.getLong("materie_id");
+          } catch (SQLException ignore){
             id = rs.getLong("id");
-            name = rs.getString("name");
-            try {
-                nrCredite = rs.getInt("nr_credite");
-                nrOreCurs = rs.getInt("nr_ore_curs");
-                nrOreSeminar = rs.getInt("nr_ore_seminar");
-                nrOreLaborator = rs.getInt("nr_ore_laborator");
-            } catch (SQLException ex) {
-                nrCredite = 0;
-                nrOreCurs = 0;
-                nrOreSeminar = 0;
-                nrOreLaborator = 0;
-            }
+          }
+          name = rs.getString("name");
+          try {
+              nrCredite = rs.getInt("nr_credite");
+              nrOreCurs = rs.getInt("nr_ore_curs");
+              nrOreSeminar = rs.getInt("nr_ore_seminar");
+              nrOreLaborator = rs.getInt("nr_ore_laborator");
+          } catch (SQLException ex) {
+              nrCredite = 0;
+              nrOreCurs = 0;
+              nrOreSeminar = 0;
+              nrOreLaborator = 0;
+          }
         } catch (SQLException e) {
             e.printStackTrace();
         }

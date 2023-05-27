@@ -29,7 +29,7 @@ public class SerieDatabase implements Dao<Serie> {
     }
 
     public void update(Serie serie) throws SQLException {
-        String query = "UPDATE serii SET \"name\"=?, grupe=? WHERE id=?";
+        String query = "UPDATE serii SET name=?, grupe=? WHERE id=?";
         var preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, serie.getName());
         preparedStatement.setString(2, stringFromList(serie.getGrupe()));

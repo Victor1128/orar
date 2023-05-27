@@ -68,3 +68,14 @@ get_student 2023-05-27 15:33:22
 update_student 2023-05-27 16:08:05
 get_student 2023-05-27 16:08:15
 delete_student 2023-05-27 16:08:51
+add_student 2023-05-27 16:33:58
+get_student 2023-05-27 16:34:03
+update_serie 2023-05-27 16:35:01
+update_serie 2023-05-27 16:35:39
+update_serie 2023-05-27 16:36:15
+get_serie 2023-05-27 16:36:20
+add_sala 2023-05-27 16:38:16
+add_ora 2023-05-27 16:40:34
+show_orar_profesor 2023-05-27 16:41:08
+add_ora 2023-05-27 16:42:44
+show_orar_student 2023-05-27 16:42:55
