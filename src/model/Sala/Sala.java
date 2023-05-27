@@ -1,4 +1,4 @@
-package Models.Sala;
+package model.Sala;
 
 import util.ClassWithName;
 

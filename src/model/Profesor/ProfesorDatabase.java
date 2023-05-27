@@ -1,9 +1,10 @@
-package Models.Profesor;
+package model.Profesor;
 
-import Models.Materie.Materie;
+import model.Materie.Materie;
 import util.DatabaseConnection;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +32,8 @@ public class ProfesorDatabase {
             return 0;
         }
         long profId = resultSet.getLong(1);
-        for (var materie : profesor.getMaterii()){
-            query = "INSERT INTO profesor_materie(profesor_id, materie_id) VALUES(?, ?)";
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, profId);
-            preparedStatement.setLong(2, materie.getId());
-            n &= preparedStatement.executeUpdate();
-        }
+        profesor.setId(profId);
+        n &= insertMateriiForProfesor(profesor);
         return n;
     }
 
@@ -46,7 +42,9 @@ public class ProfesorDatabase {
         var preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, profesor.getName());
         preparedStatement.setLong(2, profesor.getId());
-        return preparedStatement.executeUpdate();
+        int n = preparedStatement.executeUpdate();
+        n &= insertMateriiForProfesor(profesor);
+        return n;
     }
 
     public int delete(Long id) throws SQLException {
@@ -74,20 +72,26 @@ public class ProfesorDatabase {
         var preparedStatement = connection.prepareStatement(query);
         preparedStatement.setLong(1, id);
         var resultSet = preparedStatement.executeQuery();
-        query = "SELECT * FROM materii INNER JOIN profesor_materie ON materii.id = profesor_materie.materie_id WHERE profesor_materie.profesor_id = ?";
-        preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setLong(1, id);
-        var materiiResultSet = preparedStatement.executeQuery();
         if(resultSet.next()){
             Profesor profesor = new Profesor(resultSet);
-            while(materiiResultSet.next()){
-                profesor.addMaterie(new Materie(materiiResultSet));
-            }
+            profesor.setMaterii(getMateriiByProfesorId(profesor.getId()));
             return profesor;
         }
         return null;
     }
 
+    public Profesor getByName(String name) throws SQLException{
+      String query = "SELECT * FROM profesori WHERE name=?";
+      var preparedStatement = connection.prepareStatement(query);
+      preparedStatement.setString(1, name);
+      var resultSet = preparedStatement.executeQuery();
+      if(resultSet.next()){
+        Profesor profesor = new Profesor(resultSet);
+        profesor.setMaterii(getMateriiByProfesorId(profesor.getId()));
+        return profesor;
+      }
+      return null;
+    }
     private List<Materie> getMateriiByProfesorId(long id) throws SQLException {
         String query = "SELECT * FROM materii JOIN profesor_materie ON materii.id = profesor_materie.materie_id WHERE profesor_materie.profesor_id = ?";
         var preparedStatement = connection.prepareStatement(query);
@@ -98,5 +102,18 @@ public class ProfesorDatabase {
             materii.add(new Materie(materiiResultSet));
         }
         return materii;
+    }
+
+    private int insertMateriiForProfesor(Profesor profesor) throws SQLException {
+      int n = 1;
+      Long profId = profesor.getId();
+      for (var materie : profesor.getMaterii()){
+        String query = "INSERT INTO profesor_materie(profesor_id, materie_id) VALUES(?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setLong(1, profId);
+        preparedStatement.setLong(2, materie.getId());
+        n &= preparedStatement.executeUpdate();
+      }
+      return n;
     }
 }

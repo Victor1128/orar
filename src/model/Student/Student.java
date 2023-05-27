@@ -1,4 +1,4 @@
-package Models.Student;
+package model.Student;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,9 +29,6 @@ public class Student {
         this.studyYear = studyYear;
     }
 
-    public Student(Scanner in){
-        read(in);
-    }
     public Student(ResultSet rs){
         try{
             id = rs.getLong("id");
@@ -43,6 +40,10 @@ public class Student {
             e.printStackTrace();
         }
     }
+  public Student(Scanner in){
+    read(in);
+  }
+
 
     public void read(Scanner in){
         System.out.println("Nume: ");

@@ -1,10 +1,9 @@
-package Models.Ora;
+package model.Ora;
 
-import Models.Materie.Materie;
-import Models.Profesor.Profesor;
-import Models.Sala.Amfiteatru;
-import Models.Sala.Sala;
-import Models.Sala.SalaSeminar;
+import model.Materie.Materie;
+import model.Profesor.Profesor;
+import model.Sala.Sala;
+import model.Sala.SalaSeminar;
 
 import java.sql.ResultSet;
 import java.util.List;

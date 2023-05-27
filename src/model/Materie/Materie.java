@@ -1,10 +1,9 @@
-package Models.Materie;
+package model.Materie;
 
 import util.ClassWithName;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Materie implements ClassWithName {

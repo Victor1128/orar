@@ -1,4 +1,4 @@
-package Models.Student;
+package model.Student;
 
 
 import util.DatabaseConnection;
@@ -72,5 +72,15 @@ public class StudentDatabase {
         return null;
     }
 
+    public Student getByName(String name) throws SQLException {
+        String query = "SELECT * FROM studenti WHERE name=?";
+        var preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, name);
+        var resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()){
+            return new Student(resultSet);
+        }
+        return null;
+    }
 
 }

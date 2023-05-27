@@ -4,32 +4,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import Services.AuditService;
-import Services.MainService;
+import service.AuditService;
+import service.MainService;
 import util.CreateDatabase;
 
 public class Main {
-    private final static List<String> availableCommands = Arrays.asList("add_student", "add_profesor", "add_materie", "add_serie", "add_sala", "add_ora", "get_student", "get_profsor", "show_orar_student", "show_orar_student_azi", "show_orar_profesor", "show_orar_profesor_azi", "help", "exit");
+    private final static List<String> availableCommands = Arrays.asList("add_student", "add_profesor", "add_materie", "add_serie", "add_sala", "add_ora", "get_student", "get_profsor", "get_materie", "get_serie", "delete_student", "delete_profesor", "delete_ora", "delete_serie", "delete_materie", "update_student", "update_profesor", "update_materie", "update_serie", "show_orar_student", "show_orar_student_azi", "show_orar_profesor", "show_orar_profesor_azi", "help", "exit");
 
     private static void printAllCommands(){
         for(int i=0;i<availableCommands.size();++i)
-            System.out.println((i+1) + ". " + " (" + availableCommands.get(i) + ")");
+            System.out.println((i+1) + ". " + availableCommands.get(i));
     }
-
-//    public static Connection getConnection(){
-//        Connection connection = null;
-//        try {
-//            connection = DatabaseConnection.getInstance().getConnection();
-//            Statement statement = connection.createStatement();
-//            ResultSet resultSet = statement.executeQuery("SELECT * FROM Test");
-//            while(resultSet.next()){
-//                System.out.println(resultSet.getString(1));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return connection;
-//    }
 
     public static void main(String[] args) {
         CreateDatabase.createAll();
@@ -42,9 +27,6 @@ public class Main {
         }
         AuditService auditService = new AuditService();
         boolean exit = false;
-//        getConnection();
-
-//        mainService.test();
         try {
             while (!exit) {
                 System.out.println("Introduceti comanda:");
@@ -58,6 +40,17 @@ public class Main {
                     case "add_ora" -> mainService.createOra(in);
                     case "get_student" -> mainService.getStudent(in);
                     case "get_profesor" -> mainService.getProfesor(in);
+                    case "get_materie" -> mainService.getMaterie(in);
+                    case "get_serie" -> mainService.getSerie(in);
+                    case "delete_student" -> mainService.deleteStudent(in);
+                    case "delete_profesor" -> mainService.deleteProfesor(in);
+                    case "delete_ora" -> mainService.deleteOra(in);
+                    case "delete_serie" -> mainService.deleteSerie(in);
+                    case "delete_materie" -> mainService.deleteMaterie(in);
+                    case "update_student" -> mainService.updateStudent(in);
+                    case "update_profesor" -> mainService.updateProfesor(in);
+                    case "update_serie" -> mainService.updateSerie(in);
+                    case "update_materie" -> mainService.updateMaterie(in);
                     case "show_orar_student" -> mainService.afisareOrarStudent(in);
                     case "show_orar_student_azi" -> mainService.afisareOrarStudentZiCurenta(in);
                     case "show_orar_profesor" -> mainService.afisareOrarProfesor(in);
@@ -71,10 +64,10 @@ public class Main {
                     try {
                         auditService.write(command);
                     } catch (IOException e) {
-                        System.out.println(e);
+                        e.printStackTrace();
                     }
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
 

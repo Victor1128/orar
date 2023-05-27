@@ -1,4 +1,4 @@
-package Models.Serie;
+package model.Serie;
 
 import util.ClassWithName;
 

@@ -1,4 +1,4 @@
-package Models.Materie;
+package model.Materie;
 
 import util.DatabaseConnection;
 
@@ -40,10 +40,10 @@ public class MaterieDatabase {
         return preparedStatement.executeUpdate();
     }
 
-    public int delete(Materie materie) throws SQLException {
+    public int delete(Long id) throws SQLException {
         String query = "DELETE FROM materii WHERE id=?";
         var preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setLong(1, materie.getId());
+        preparedStatement.setLong(1, id);
         return preparedStatement.executeUpdate();
     }
 
@@ -67,6 +67,17 @@ public class MaterieDatabase {
             return new Materie(resultSet);
         }
         return null;
+    }
+
+    public Materie getByName(String name) throws SQLException{
+      String query = "SELECT * FROM materii WHERE name=?";
+      var preparedStatement = connection.prepareStatement(query);
+      preparedStatement.setString(1, name);
+      var resultSet = preparedStatement.executeQuery();
+      if(resultSet.next()){
+        return new Materie(resultSet);
+      }
+      return null;
     }
 
 }

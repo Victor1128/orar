@@ -1,6 +1,6 @@
-package Models.Sala;
+package model.Sala;
 
-import Models.Materie.Materie;
+import model.Materie.Materie;
 import util.DatabaseConnection;
 
 import java.sql.Connection;

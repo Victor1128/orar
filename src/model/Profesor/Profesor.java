@@ -1,6 +1,6 @@
-package Models.Profesor;
+package model.Profesor;
 
-import Models.Materie.Materie;
+import model.Materie.Materie;
 import util.ClassWithName;
 
 import java.sql.ResultSet;

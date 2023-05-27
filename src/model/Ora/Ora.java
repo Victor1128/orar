@@ -1,9 +1,9 @@
-package Models.Ora;
+package model.Ora;
 
-import Models.Materie.Materie;
-import Models.Profesor.Profesor;
-import Models.Sala.Sala;
-import Models.Serie.Serie;
+import model.Materie.Materie;
+import model.Profesor.Profesor;
+import model.Sala.Sala;
+import model.Serie.Serie;
 
 import java.sql.ResultSet;
 import java.util.List;

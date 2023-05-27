@@ -1,13 +1,13 @@
-package Models.Ora;
+package model.Ora;
 
-import Models.Materie.Materie;
-import Models.Materie.MaterieDatabase;
-import Models.Profesor.Profesor;
-import Models.Profesor.ProfesorDatabase;
-import Models.Sala.Sala;
-import Models.Sala.SalaDatabase;
-import Models.Serie.Serie;
-import Models.Serie.SerieDatabase;
+import model.Materie.Materie;
+import model.Materie.MaterieDatabase;
+import model.Profesor.Profesor;
+import model.Profesor.ProfesorDatabase;
+import model.Sala.Sala;
+import model.Sala.SalaDatabase;
+import model.Serie.Serie;
+import model.Serie.SerieDatabase;
 import util.DatabaseConnection;
 
 import java.sql.Connection;
@@ -57,7 +57,7 @@ public class OraDatabase {
         return preparedStatement.executeUpdate();
     }
 
-    public int delete(int id) throws SQLException {
+    public int delete(Long id) throws SQLException {
         String query = "DELETE FROM ore WHERE id=?";
         var preparedStatement = connection.prepareStatement(query);
         preparedStatement.setLong(1, id);

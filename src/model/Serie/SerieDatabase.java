@@ -1,4 +1,4 @@
-package Models.Serie;
+package model.Serie;
 
 import util.DatabaseConnection;
 
@@ -52,6 +52,18 @@ public class SerieDatabase {
             return new Serie(resultSet);
         }
         return null;
+    }
+
+    public Serie getByName(String name) throws SQLException{
+      String query = "SELECT * FROM serii WHERE name=?";
+      var preparedStatement = connection.prepareStatement(query);
+      preparedStatement.setString(1, name);
+      var resultSet = preparedStatement.executeQuery();
+      if(resultSet.next()){
+        return new Serie(resultSet);
+      }
+      return null;
+
     }
 
     public List<Serie> getAll() throws SQLException {
