@@ -1,5 +1,6 @@
 package service;
 
+import java.rmi.UnexpectedException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
@@ -60,31 +61,23 @@ public class MainService {
         profesorOreMap.get(p).add(ora);
     }
     public void createStudent(Scanner in) throws SQLException {
-        Student student = new Student(in);
-        studentDatabase.add(student);
+        DatabaseService.getInstance().add(in, studentDatabase, "student", null);
         studenti = studentDatabase.getAll();
-        System.out.println("Studentul a fost creat cu succes!");
     }
 
     public void createProfesor(Scanner in) throws SQLException {
-        Profesor profesor = new Profesor(in, materii);
-        profesorDatabase.add(profesor);
+        DatabaseService.getInstance().add(in, profesorDatabase, "profesor", materii);
         profesori = profesorDatabase.getAll();
-        System.out.println("Profesorul a fost creat cu succes!");
     }
 
     public void createSerie(Scanner in) throws SQLException {
-        Serie serie = new Serie(in);
-        serieDatabase.add(serie);
+        DatabaseService.getInstance().add(in, serieDatabase, "serie", null);
         serii = serieDatabase.getAll();
-        System.out.println("Serie creata cu succes!");
     }
 
     public void createMaterie(Scanner in) throws SQLException {
-        Materie materie = new Materie(in, "Simple");
-        materieDatabase.add(materie);
+        DatabaseService.getInstance().add(in, materieDatabase, "materie", null);
         materii = materieDatabase.getAll();
-        System.out.println("Materia a fost creata cu succes!");
     }
 
     public void createSala(Scanner in) throws SQLException {
@@ -137,126 +130,35 @@ public class MainService {
     }
 
     public Student getStudent(Scanner in){
-        System.out.println("Introduceti numele studentului: ");
-        String nume = in.nextLine();
-        Student student;
-        try {
-          student = studentDatabase.getByName(nume);
-        }
-        catch (SQLException e){
-          e.printStackTrace();
-          return null;
-        }
-        if (student != null)
-            System.out.println(student);
-        else{
-            System.out.println("Introduceti id-ul studentului: ");
-            Long id = in.nextLong();
-            try {
-              System.out.println(studentDatabase.getById(id));
-            }catch (SQLException e){
-              e.printStackTrace();
-            }
-        }
-        return student;
+        return DatabaseService.getInstance().get(in, studentDatabase, "student");
     }
 
     public Profesor getProfesor(Scanner in){
-        System.out.println("Introduceti numele profesorului: ");
-        String nume = in.nextLine();
-        Profesor profesor;
-        try{
-          profesor = profesorDatabase.getByName(nume);
-        }catch (SQLException e){
-          e.printStackTrace();
-          return null;
-        }
-        if(profesor != null) {
-          System.out.println(profesor);
-          return profesor;
-        }
-        System.out.println("Nu exista niciun profesor cu acest nume!");
-        System.out.println("Introducesti id-ul profesorului");
-        long id = Long.parseLong(in.nextLine());
-        try{
-          profesor = profesorDatabase.getById(id);
-        }catch (SQLException e){
-          e.printStackTrace();
-        }
-        System.out.println(profesor != null? profesor: "Nu exista niciun profesor cu acest id!");
-        return profesor;
+        return DatabaseService.getInstance().get(in, profesorDatabase, "profesor");
     }
 
     public void getMaterie(Scanner in){
-      System.out.println("Introduceti numele materiei: ");
-      String nume = in.nextLine();
-      Materie materie = null;
-      try{
-        materie = materieDatabase.getByName(nume);
-      }catch (SQLException e){
-        e.printStackTrace();
-        return;
-      }
-      if(materie != null){
-        System.out.println(materie);
-        return;
-      }
-      System.out.println("Nu exista nicio materie cu acest nume!");
-      System.out.println("Introduceti id-ul materiei");
-      long id = Long.parseLong(in.nextLine());
-      try{
-        materie = materieDatabase.getById(id);
-      }catch (SQLException e){
-        e.printStackTrace();
-      }
-      System.out.println(materie != null? materie : "Nu exista nicio materie cu acest nume");
+     DatabaseService.getInstance().get(in, materieDatabase, "materie");
     }
 
     public void getSerie(Scanner in){
-      System.out.println("Introduceti numele seriei:");
-      String nume = in.nextLine();
-      Serie serie;
-      try{
-        serie = serieDatabase.getByName(nume);
-      }catch (SQLException e){
-        e.printStackTrace();
-        return;
-      }
-      if(serie != null){
-        System.out.println(serie);
-        return;
-      }
-      System.out.println("Nu exista nicio serie cu acest nume");
-      System.out.println("Introduceti id-ul seriei");
-      long id = Long.parseLong(in.nextLine());
-      try{
-        serie = serieDatabase.getById(id);
-      }catch (SQLException e){
-        e.printStackTrace();
-      }
-      System.out.println(serie != null? serie: "Nu exista nicio serie cu acest id!");
+      DatabaseService.getInstance().get(in, serieDatabase, "serie");
     }
     public void deleteStudent(Scanner in){
-      System.out.println("Introduceti ID-ul studentului: ");
-      Long id = in.nextLong();
-      try{
-          int n = studentDatabase.delete(id);
-          studenti = studentDatabase.getAll();
-          System.out.println(n!=0 ? "Studentul a fost sters cu succes!" : "Eroare la stergerea studentului");
-      } catch (SQLException e) {
-          System.out.println("Nu exista niciun student cu acest ID!");
-      }
+     DatabaseService.getInstance().delete(in, studentDatabase, "student");
+     try {
+       studenti = studentDatabase.getAll();
+     }catch (SQLException e){
+       e.printStackTrace();
+     }
     }
 
     public void deleteProfesor(Scanner in){
-      System.out.println("Introduceti ID-ul profesorului: ");
-      Long id = in.nextLong();
-      try{
-          profesorDatabase.delete(id);
-          profesori = profesorDatabase.getAll();
-          System.out.println("Profesorul a fost sters cu succes!");
-      } catch (SQLException e) {
-          System.out.println("Nu exista niciun profesor cu acest ID!");
+      DatabaseService.getInstance().delete(in, profesorDatabase, "profesor");
+      try {
+        profesori = profesorDatabase.getAll();
+      }catch (SQLException e){
+        e.printStackTrace();
       }
     }
 
@@ -273,61 +175,35 @@ public class MainService {
     }
 
     public void deleteMaterie(Scanner in){
-        System.out.println("Introduceti ID-ul materiei: ");
-        Long id = in.nextLong();
-        try{
-            materieDatabase.delete(id);
-            materii = materieDatabase.getAll();
-            System.out.println("Materia a fost stearsa cu succes!");
-        } catch (SQLException e) {
-            System.out.println("Nu exista nicio materie cu acest ID!");
-        }
+      DatabaseService.getInstance().delete(in, materieDatabase, "materie");
+      try {
+        materii = materieDatabase.getAll();
+      }catch (SQLException e){
+        e.printStackTrace();
+      }
     }
 
     public void deleteSerie(Scanner in){
-        System.out.println("Introduceti ID-ul seriei: ");
-        Long id = in.nextLong();
-        try{
-            serieDatabase.delete(id);
-            serii = serieDatabase.getAll();
-            System.out.println("Seria a fost stearsa cu succes!");
-        } catch (SQLException e) {
-            System.out.println("Nu exista nicio serie cu acest ID!");
-        }
+      DatabaseService.getInstance().delete(in, serieDatabase, "serie");
+      try {
+        serii = serieDatabase.getAll();
+      }catch (SQLException e){
+        e.printStackTrace();
+      }
     }
 
     public void updateStudent(Scanner in){
-      System.out.println("Introduceti id-ul studentului: ");
-      Long id = Long.parseLong(in.nextLine());
-      try {
-        System.out.println(studentDatabase.getById(id));
-      }catch (SQLException e){
-        System.out.println("Nu exista niciun student cu acest ID!");
-        return;
-      }
+        DatabaseService.getInstance().update(in, studentDatabase, "student", null);
       try{
-        Student newStudent = new Student(in);
-        newStudent.setId(id);
-        studentDatabase.update(newStudent);
         studenti = studentDatabase.getAll();
-      }catch(SQLException e){
+      }catch (SQLException e){
         e.printStackTrace();
       }
     }
 
     public void updateProfesor(Scanner in){
-      System.out.println("Introduceti id-ul profesorului");
-      long id = Long.parseLong(in.nextLine());
+      DatabaseService.getInstance().update(in, profesorDatabase, "profesor", materii);
       try{
-        System.out.println(profesorDatabase.getById(id));
-      }catch (SQLException e){
-        System.out.println("Nu exista niciun presor cu acest ID!");
-        return;
-      }
-      try{
-        Profesor newProfesor = new Profesor(in, materii);
-        newProfesor.setId(id);
-        profesorDatabase.update(newProfesor);
         profesori = profesorDatabase.getAll();
       }catch (SQLException e){
         e.printStackTrace();
@@ -335,17 +211,8 @@ public class MainService {
     }
 
     public void updateMaterie(Scanner in){
-      System.out.println("Introduceti id-ul materiei");
-      long id = Long.parseLong(in.nextLine());
+      DatabaseService.getInstance().update(in, materieDatabase, "materie", null);
       try{
-        System.out.println(materieDatabase.getById(id));
-      }catch (SQLException e){
-        System.out.println("Nu exista nicio materie cu acest ID");
-      }
-      try{
-        Materie newMaterie = new Materie(in, "Simple");
-        newMaterie.setId(id);
-        materieDatabase.update(newMaterie);
         materii = materieDatabase.getAll();
       }catch (SQLException e){
         e.printStackTrace();
@@ -353,17 +220,8 @@ public class MainService {
     }
 
     public void updateSerie(Scanner in){
-      System.out.println("Introduceti id-ul seriei");
-      long id = Long.parseLong(in.nextLine());
+     DatabaseService.getInstance().update(in, serieDatabase, "serie", null);
       try{
-        System.out.println(serieDatabase.getById(id));
-      }catch (SQLException e){
-        System.out.println("Nu exista nicio serie cu acest ID");
-      }
-      try{
-        Serie newSerie = new Serie(in);
-        newSerie.setId(id);
-        serieDatabase.update(newSerie);
         serii = serieDatabase.getAll();
       }catch (SQLException e){
         e.printStackTrace();

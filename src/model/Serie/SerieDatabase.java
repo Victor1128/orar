@@ -1,5 +1,6 @@
 package model.Serie;
 
+import util.Dao;
 import util.DatabaseConnection;
 
 import java.sql.Connection;
@@ -8,7 +9,7 @@ import java.util.List;
 
 import static util.Utils.stringFromList;
 
-public class SerieDatabase {
+public class SerieDatabase implements Dao<Serie> {
     static Connection connection;
 
     static {
@@ -27,13 +28,13 @@ public class SerieDatabase {
         return preparedStatement.executeUpdate();
     }
 
-    public int update(Serie serie) throws SQLException {
+    public void update(Serie serie) throws SQLException {
         String query = "UPDATE serii SET \"name\"=?, grupe=? WHERE id=?";
         var preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, serie.getName());
         preparedStatement.setString(2, stringFromList(serie.getGrupe()));
         preparedStatement.setLong(3, serie.getId());
-        return preparedStatement.executeUpdate();
+      preparedStatement.executeUpdate();
     }
 
     public int delete(Long id) throws SQLException {

@@ -1,12 +1,13 @@
 package model.Materie;
 
+import util.Dao;
 import util.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MaterieDatabase {
+public class MaterieDatabase implements Dao<Materie> {
     static Connection connection;
 
     static {
@@ -28,7 +29,7 @@ public class MaterieDatabase {
         return preparedStatement.executeUpdate();
     }
 
-    public int update(Materie materie) throws SQLException {
+    public void update(Materie materie) throws SQLException {
         String query = "UPDATE materii SET name=?, nrCredite=?, nrOreCurs=?, nrOreSeminar=?, nrOreLaborator=? WHERE id=?";
         var preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, materie.getName());
@@ -37,7 +38,7 @@ public class MaterieDatabase {
         preparedStatement.setInt(4, materie.getNrOreSeminar());
         preparedStatement.setInt(5, materie.getNrOreLaborator());
         preparedStatement.setLong(6, materie.getId());
-        return preparedStatement.executeUpdate();
+      preparedStatement.executeUpdate();
     }
 
     public int delete(Long id) throws SQLException {
@@ -58,7 +59,7 @@ public class MaterieDatabase {
         return materii;
     }
 
-    public Materie getById(long id) throws SQLException {
+    public Materie getById(Long id) throws SQLException {
         String query = "SELECT * FROM materii WHERE id=?";
         var preparedStatement = connection.prepareStatement(query);
         preparedStatement.setLong(1, id);

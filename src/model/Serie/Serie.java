@@ -1,5 +1,6 @@
 package model.Serie;
 
+import model.ModelBase;
 import util.ClassWithName;
 
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 
 import static util.Utils.listFromString;
 
-public class Serie implements ClassWithName {
+public class Serie extends ModelBase implements ClassWithName {
     private Long id;
     private String name;
     private List<String> grupe = new ArrayList<>();
