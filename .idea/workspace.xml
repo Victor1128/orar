@@ -5,21 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0496c36d-af15-49b1-a0bd-2724eafc3dd8" name="Changes" comment="adaugat cele 4 crud-uri">
-      <change afterPath="$PROJECT_DIR$/src/model/ModelBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/DatabaseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/audit.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/audit.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Materie/Materie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Materie/Materie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Materie/MaterieDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Materie/MaterieDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Ora/OraDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ora/OraDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Profesor/Profesor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Profesor/Profesor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Profesor/ProfesorDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Profesor/ProfesorDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Serie/Serie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Serie/Serie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Serie/SerieDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Serie/SerieDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Student/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Student/StudentDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Student/StudentDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/MainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/MainService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Dao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="mosteniredb" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
