@@ -1,6 +1,7 @@
 package model.Profesor;
 
 import model.Materie.Materie;
+import util.Dao;
 import util.DatabaseConnection;
 
 import java.sql.Connection;
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfesorDatabase {
+public class ProfesorDatabase implements Dao<Profesor> {
     static Connection connection;
 
     static {
@@ -37,14 +38,13 @@ public class ProfesorDatabase {
         return n;
     }
 
-    public int update(Profesor profesor) throws SQLException {
+    public void update(Profesor profesor) throws SQLException {
         String query = "UPDATE profesori SET name=? WHERE id=?";
         var preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, profesor.getName());
         preparedStatement.setLong(2, profesor.getId());
         int n = preparedStatement.executeUpdate();
         n &= insertMateriiForProfesor(profesor);
-        return n;
     }
 
     public int delete(Long id) throws SQLException {
@@ -54,7 +54,7 @@ public class ProfesorDatabase {
         return preparedStatement.executeUpdate();
     }
 
-    public List<Profesor> getAll() throws SQLException {
+  public List<Profesor> getAll() throws SQLException {
         String query = "SELECT * FROM profesori";
         var preparedStatement = connection.prepareStatement(query);
         var resultSet = preparedStatement.executeQuery();
@@ -67,7 +67,7 @@ public class ProfesorDatabase {
         return profesori;
     }
 
-    public Profesor getById(long id) throws SQLException {
+    public Profesor getById(Long id) throws SQLException {
         String query = "SELECT * FROM profesori WHERE id=?";
         var preparedStatement = connection.prepareStatement(query);
         preparedStatement.setLong(1, id);

@@ -1,12 +1,13 @@
 package model.Materie;
 
+import model.ModelBase;
 import util.ClassWithName;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Materie implements ClassWithName {
+public class Materie extends ModelBase implements ClassWithName {
     private Long id = null;
     private String name;
     private int nrCredite;

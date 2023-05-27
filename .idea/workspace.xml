@@ -4,34 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0496c36d-af15-49b1-a0bd-2724eafc3dd8" name="Changes" comment="easy queries">
-      <change afterPath="$PROJECT_DIR$/src/util/Dao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="0496c36d-af15-49b1-a0bd-2724eafc3dd8" name="Changes" comment="adaugat cele 4 crud-uri">
+      <change afterPath="$PROJECT_DIR$/src/model/ModelBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/service/DatabaseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Orar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Orar.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/audit.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/audit.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Materie/Materie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Materie/Materie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Materie/MaterieDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Materie/MaterieDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Ora/Curs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ora/Curs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Ora/Laborator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ora/Laborator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Ora/Ora.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ora/Ora.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Ora/OraDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ora/OraDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Ora/Seminar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ora/Seminar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Profesor/Profesor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Profesor/Profesor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Profesor/ProfesorDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Profesor/ProfesorDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Sala/Amfiteatru.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Sala/Amfiteatru.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Sala/Sala.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Sala/Sala.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Sala/SalaDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Sala/SalaDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Sala/SalaLaborator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Sala/SalaLaborator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Sala/SalaSeminar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Sala/SalaSeminar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Serie/Serie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Serie/Serie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Serie/SerieDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Serie/SerieDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Student/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Student/StudentDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Student/StudentDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/AuditService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/AuditService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/MainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/MainService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/StudentDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Materie/Materie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Materie/Materie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Materie/MaterieDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Materie/MaterieDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Ora/OraDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ora/OraDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Profesor/Profesor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Profesor/Profesor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Profesor/ProfesorDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Profesor/ProfesorDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Serie/Serie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Serie/Serie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Serie/SerieDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Serie/SerieDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Student/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Student/StudentDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Student/StudentDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/MainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/MainService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Dao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +30,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -131,7 +119,7 @@
       <workItem from="1684669919951" duration="1079000" />
       <workItem from="1685012325769" duration="32502000" />
       <workItem from="1685109157174" duration="27000" />
-      <workItem from="1685180634656" duration="5779000" />
+      <workItem from="1685180634656" duration="10425000" />
     </task>
     <task id="LOCAL-00001" summary="etapa 1">
       <created>1680820770112</created>
@@ -168,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685032277739</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="adaugat cele 4 crud-uri">
+      <created>1685186592281</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685186592281</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,7 +180,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="database" />
+                        <option value="mosteniredb" />
                       </list>
                     </value>
                   </entry>
@@ -203,7 +198,8 @@
     <MESSAGE value="create tables" />
     <MESSAGE value="refactoring" />
     <MESSAGE value="easy queries" />
-    <option name="LAST_COMMIT_MESSAGE" value="easy queries" />
+    <MESSAGE value="adaugat cele 4 crud-uri" />
+    <option name="LAST_COMMIT_MESSAGE" value="adaugat cele 4 crud-uri" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

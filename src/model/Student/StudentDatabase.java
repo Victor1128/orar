@@ -1,6 +1,7 @@
 package model.Student;
 
 
+import util.Dao;
 import util.DatabaseConnection;
 
 import java.sql.Connection;
@@ -9,7 +10,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
-public class StudentDatabase {
+public class StudentDatabase implements Dao<Student> {
     static Connection connection;
 
     static {
@@ -19,7 +20,7 @@ public class StudentDatabase {
             e.printStackTrace();
         }
     }
-
+    @Override
     public int add(Student student) throws SQLException {
         String query = "INSERT INTO studenti(name, birthdate, grupa, study_year) VALUES(?,?,?,?)";
         var preparedStatement = connection.prepareStatement(query);
@@ -31,7 +32,8 @@ public class StudentDatabase {
         return preparedStatement.executeUpdate();
     }
 
-    public int update(Student student) throws SQLException {
+    @Override
+    public void update(Student student) throws SQLException {
         String query = "UPDATE studenti SET name=?, birthdate=?, grupa=?, study_year=? WHERE id=?";
         var preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, student.getName());
@@ -40,9 +42,10 @@ public class StudentDatabase {
         preparedStatement.setString(3, student.getGrupa());
         preparedStatement.setInt(4, student.getStudyYear());
         preparedStatement.setLong(5, student.getId());
-        return preparedStatement.executeUpdate();
+      preparedStatement.executeUpdate();
     }
 
+    @Override
     public int delete(Long id) throws SQLException {
         String query = "DELETE FROM studenti WHERE id=?";
         var preparedStatement = connection.prepareStatement(query);
@@ -50,6 +53,7 @@ public class StudentDatabase {
         return preparedStatement.executeUpdate();
     }
 
+    @Override
     public List<Student> getAll() throws SQLException {
         String query = "SELECT * FROM studenti";
         var preparedStatement = connection.prepareStatement(query);
@@ -61,6 +65,7 @@ public class StudentDatabase {
         return students;
     }
 
+    @Override
     public Student getById(Long id) throws SQLException {
         String query = "SELECT * FROM studenti WHERE id=?";
         var preparedStatement = connection.prepareStatement(query);
@@ -72,6 +77,7 @@ public class StudentDatabase {
         return null;
     }
 
+    @Override
     public Student getByName(String name) throws SQLException {
         String query = "SELECT * FROM studenti WHERE name=?";
         var preparedStatement = connection.prepareStatement(query);

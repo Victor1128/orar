@@ -1,12 +1,15 @@
 package model.Student;
 
+import model.ModelBase;
+import util.ClassWithName;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class Student {
+public class Student  extends ModelBase implements ClassWithName {
     private Long id = null;
 
     private String name;
@@ -15,7 +18,7 @@ public class Student {
     private int studyYear;
 
     public Student(Long id, String name, LocalDate birthDate, String grupa, int studyYear) {
-        this.id = id;
+      this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.grupa = grupa;

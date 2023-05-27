@@ -70,8 +70,8 @@ public class OraDatabase {
         preparedStatement.setLong(1, id);
         var resultSet = preparedStatement.executeQuery();
         if(resultSet.next()){
-            Profesor profesor = profesorDatabase.getById(resultSet.getInt("profesor_id"));
-            Materie materie = materieDatabase.getById(resultSet.getInt("materie_id"));
+            Profesor profesor = profesorDatabase.getById(resultSet.getLong("profesor_id"));
+            Materie materie = materieDatabase.getById(resultSet.getLong("materie_id"));
             Sala sala = salaDatabase.getAmf(resultSet.getInt("sala_id"));
             Serie serie = serieDatabase.getById(resultSet.getLong("serie_id"));
             return new Curs(resultSet, profesor, materie, sala, serie);
@@ -85,8 +85,8 @@ public class OraDatabase {
         preparedStatement.setLong(1, id);
         var resultSet = preparedStatement.executeQuery();
         if(resultSet.next()){
-            Profesor profesor = profesorDatabase.getById(resultSet.getInt("profesor_id"));
-            Materie materie = materieDatabase.getById(resultSet.getInt("materie_id"));
+            Profesor profesor = profesorDatabase.getById(resultSet.getLong("profesor_id"));
+            Materie materie = materieDatabase.getById(resultSet.getLong("materie_id"));
             Sala sala = salaDatabase.getAmf(resultSet.getInt("sala_id"));
             String grupa = resultSet.getString("grupa");
             return new Seminar(resultSet, profesor, materie, sala, grupa);
@@ -100,8 +100,8 @@ public class OraDatabase {
         preparedStatement.setLong(1, id);
         var resultSet = preparedStatement.executeQuery();
         if(resultSet.next()){
-            Profesor profesor = profesorDatabase.getById(resultSet.getInt("profesor_id"));
-            Materie materie = materieDatabase.getById(resultSet.getInt("materie_id"));
+            Profesor profesor = profesorDatabase.getById(resultSet.getLong("profesor_id"));
+            Materie materie = materieDatabase.getById(resultSet.getLong("materie_id"));
             Sala sala = salaDatabase.getAmf(resultSet.getInt("sala_id"));
             String grupa = resultSet.getString("grupa");
             return new Laborator(resultSet, profesor, materie, sala, grupa);
@@ -115,8 +115,8 @@ public class OraDatabase {
             var resultSet = preparedStatement.executeQuery();
             List<Curs> cursuri = new ArrayList<>();
             while(resultSet.next()){
-                Profesor profesor = profesorDatabase.getById(resultSet.getInt("profesor_id"));
-                Materie materie = materieDatabase.getById(resultSet.getInt("materie_id"));
+                Profesor profesor = profesorDatabase.getById(resultSet.getLong("profesor_id"));
+                Materie materie = materieDatabase.getById(resultSet.getLong("materie_id"));
                 Sala sala = salaDatabase.getAmf(resultSet.getInt("sala_id"));
                 Serie serie = serieDatabase.getById(resultSet.getLong("serie_id"));
                 cursuri.add(new Curs(resultSet, profesor, materie, sala, serie));
@@ -130,8 +130,8 @@ public class OraDatabase {
         var resultSet = preparedStatement.executeQuery();
         List<Seminar> seminare = new ArrayList<>();
         while(resultSet.next()){
-            Profesor profesor = profesorDatabase.getById(resultSet.getInt("profesor_id"));
-            Materie materie = materieDatabase.getById(resultSet.getInt("materie_id"));
+            Profesor profesor = profesorDatabase.getById(resultSet.getLong("profesor_id"));
+            Materie materie = materieDatabase.getById(resultSet.getLong("materie_id"));
             Sala sala = salaDatabase.getSalaSeminar(resultSet.getInt("sala_id"));
             String grupa = resultSet.getString("grupa");
             seminare.add(new Seminar(resultSet, profesor, materie, sala, grupa));
@@ -145,8 +145,8 @@ public class OraDatabase {
         var resultSet = preparedStatement.executeQuery();
         List<Laborator> laboratoare = new ArrayList<>();
         while(resultSet.next()){
-            Profesor profesor = profesorDatabase.getById(resultSet.getInt("profesor_id"));
-            Materie materie = materieDatabase.getById(resultSet.getInt("materie_id"));
+            Profesor profesor = profesorDatabase.getById(resultSet.getLong("profesor_id"));
+            Materie materie = materieDatabase.getById(resultSet.getLong("materie_id"));
             Sala sala = salaDatabase.getSalaLaborator(resultSet.getInt("sala_id"));
             String grupa = resultSet.getString("grupa");
             laboratoare.add(new Laborator(resultSet, profesor, materie, sala, grupa));

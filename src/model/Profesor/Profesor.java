@@ -1,6 +1,7 @@
 package model.Profesor;
 
 import model.Materie.Materie;
+import model.ModelBase;
 import util.ClassWithName;
 
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 
 import static util.Utils.selectFromMultipleChoices;
 
-public class Profesor implements ClassWithName {
+public class Profesor extends ModelBase implements ClassWithName {
     private Long id = null;
     private String name;
     private List<Materie> materii = new ArrayList<>();
